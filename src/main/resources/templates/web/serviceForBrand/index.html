@@ -1,0 +1,162 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="web/fragments/brand/layout">
+<head>
+    <title th:text="${serviceForBrand.title}"></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="description" th:content="${serviceForBrand.description}"/>
+    <meta name="keywords" th:content="${serviceForBrand.keywords}"/>
+    <meta name="author" th:content="${serviceForBrand.author}"/>
+    <link rel="icon" href="http://www.760pp.net/tpl/weixiu/favicon.ico"/>
+    <link rel="stylesheet" type="text/css" href="/web/css/brand/css.css"/>
+    <script type="text/javascript" src="/web/js/jquery-1.8.3.min.js"></script>
+    <script src="/web/js/jquery.flexslider-min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.banner').flexslider({
+                directionNav: true,
+                pauseOnAction: false,
+                controlNav: false
+            });
+            jQuery.fn.searchdiv = function (options) {
+                var opts = $.extend({}, $.fn.searchdivli, options);
+                return this.each(function () {
+                    var $this = $(this);
+                    $this.addClass(opts.initClass);
+                    $this.focus(function () {
+
+                        var val = $this.val();
+                        $this.removeClass(opts.initClass);
+                        if (val == opts.initVal) {
+                            $this.val("");
+                        }
+                    });
+                    $this.blur(function () {
+                        var val = $this.val();
+                        if (val == "") {
+                            $this.addClass("search_color");
+                            $this.val(opts.initVal);
+                        }
+                    });
+                })
+            };
+
+        });
+
+        $(".Homexuqiu").click(function(){
+            $(".Cooperationbox").fadeIn(300);
+        });
+        $(".commonposition a").hover(function(){
+            $(this).find("span").show(300);
+        },function(){
+            $(this).find("span").hide(300);
+        })
+        $(window).scroll(function(){
+
+            if($(window).scrollTop()>1){
+                $(".commonposition").hide();
+            }else{
+                $(".commonposition").hide();
+            }
+
+        })
+
+    </script>
+
+    <!-- 切换 -->
+    <script type="text/javascript" src="/web/js/jquery.SuperSlide.2.1.1.js"></script>
+    <script type="text/javascript" src="/web/js/com.js"></script>
+    <style>.one-pan-tip { cursor: pointer;}.one-pan-tip::before {background-position: center;background-size: 100% 100%;background-repeat: no-repeat;box-sizing: border-box;width: 1em;height: 1em;margin: 0 1px .15em 1px;vertical-align: middle;display: inline-block;}.one-pan-tip-success::before {content: '';background-image: url(data:/web/images/index/png;)}</style>
+</head>
+<body>
+    <div layout:fragment="content">
+        <div class="title2">
+            <div class="xx"></div>
+            <h2>服务项目</h2>
+            <h3>/ SERVICE PROJECT</h3>
+        </div>
+
+        <div class="w1200">
+            <div class="product3" id="pro_div1"> <img class="mr_frBtnL prev" src="/web/images/brand/left.jpg"/>
+                <div id="pro_list1">
+                    <div class="tempWrap" style="overflow:hidden; position:relative; width:1140px">
+                        <ul style="width: 2565px; position: relative; overflow: hidden; padding: 0px; margin: 0px; left: 0px;">
+                            <li th:each="serviceForBrandProject,stat:${serviceForBrandProjects}" th:class="${stat.index==0? 'clone' : ''}" style="float: left; width: 257px;">
+                                <a th:href="${'/serviceForBrandProject/detail_' + serviceForBrandProject.id + '.html'}">
+                                    <div class="pro_img"><img th:src="${serviceForBrandProject.img}"  th:alt="${serviceForBrandProject.title}"/></div>
+                                    <p th:text="${serviceForBrandProject.title}"></p>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <img class="mr_frBtnR next" src="/web/images/brand/right.jpg"/> </div>
+        </div>
+        <div class="flow_bj">
+            <div class="title2">
+                <div class="xx"></div>
+                <h2>服务流程</h2>
+                <h3>/ SERVICE FLOW</h3>
+            </div>
+            <div class="flow">
+                <div class="flow1 f_l">
+                    <ul>
+                        <li>
+                            <img src="/web/images/brand/icon3.png" width="65" height="65"/>
+                            <div class="flow_x"></div>
+                            <h2>专业团队，维修、安装一站式解决</h2>
+                            <p>集团公司旗下专业技术团队，从产品采购到工程安装、售后维护，一站式为您解决高效率，低成本完成您的工程需求。</p>
+                        </li>
+                        <li style="margin-top:90px">
+                            <img src="/web/images/brand/icon4.png" width="65" height="65"/>
+                            <div class="flow_x"></div>
+                            <h2>个性化定制，精湛的维修服务</h2>
+                            <p>专业的设计师为您提供个性化的定制解决方案。娴熟的工程师和技术人员为您提供现场施工操作。严格的工程监理机制进行品质监控，保证工程安全和质量。</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="flow_img f_l"><img src="/web/images/brand/pic14.png" width="397" height="351"/></div>
+                <div class="flow1 f_r">
+                    <ul>
+                        <li>
+                            <img src="/web/images/brand/icon5.png" width="65" height="65"/>
+                            <div class="flow_x"></div>
+                            <h2>产品齐全，满足不同领域电器维修需求</h2>
+                            <p>采用专业仪器检测以及技术团队合作，为客户提供快速维修，可全方位专业满足不同领域电器维修需求。</p>
+                        </li>
+                        <li style="margin-top:90px">
+                            <img src="/web/images/brand/icon6.png" width="65" height="65"/>
+                            <div class="flow_x"></div>
+                            <h2>7X24h响应，完善的售后服务</h2>
+                            <p>健全的服务网络，7天24小时响应机制；专业技术人员上门维护， 现场为您解决问题，提供完善的保障服务。当日报修，就近安排，30分钟上门。 </p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="title2">
+            <div class="xx"></div>
+            <h2>维修常识</h2>
+            <h3>/ MAINTENANCE KNOWLEDEGE</h3>
+        </div>
+        <div class="w1200 news">
+            <ul>
+                <li th:each="serviceForBrandMessage:${serviceForBrandMessages}">
+                    <a th:href="${'/serviceForBrandMessage/detail_' + serviceForBrandMessage.id + '.html'}">
+                        <div class="time">
+                            <span th:text="${#strings.substring(serviceForBrandMessage.createTime,0,4)}">2019</span><br/>
+                            <em th:text="${#strings.substring(serviceForBrandMessage.createTime,5,10)}">12-14</em>
+                        </div>
+                        <div class="news_main">
+                            <h2 th:text="${serviceForBrandMessage.title}">家用空调不制热是什么原因</h2>
+                            <p th:text="${serviceForBrandMessage.overview}">
+                            </p>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!--banner-->
+</body>
+</html>

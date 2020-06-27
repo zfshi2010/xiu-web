@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="web/fragments/layout">
+<head>
+    <title th:text="${message.title + '-信息详情'}"></title>
+    <meta charset="utf-8" />
+</head>
+<body>
+<div layout:fragment="content">
+    <!-- slider -->
+    <section id="subheader" data-speed="8" data-type="background" class="padding-top-bottom subheader">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 th:text="${message.title}"></h1>
+                    <ul class="breadcrumbs">
+                        <li><a href="index.html">首页</a></li>
+                        <b>/</b>
+                        <li class="active">信息详情</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- content begin -->
+    <div id="content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="blog-single">
+                        <!-- post begin -->
+                        <article>
+                            <div class="post-media">
+                                <img th:src="${message.img}" class="img-responsive"/>
+                            </div>
+                            <div class="post-content">
+                                <div class="post-title">
+                                    <h2 th:text="${message.title}"></h2>
+                                </div>
+                                <div class="post-metadata">
+                                        <span class="posted-on">
+                                            <i class="fa fa-clock-o"></i>
+                                            <div th:text="${message.createTime}"></div>
+                                        </span>
+                                    <span class="byline">
+                                            <i class="fa fa-user"></i>
+                                            <a href="#" th:text="${message.author}"></a>
+                                        </span>
+                                    <span class="cat-links">
+                                            <i class="fa fa-folder-open"></i>
+                                            <a href="#">Markup</a>
+                                        </span>
+                                    <span class="comment-link">
+                                            <i class="fa fa-comments-o"></i>
+                                            <a href="#">29 comments</a>
+                                        </span>
+                                </div>
+                                <div class="hr"></div>
+                                <div class="post-entry">
+                                    <p th:utext="${message.content}">
+                                    </p>
+                                </div>
+                                <div class="footer-entry clearfix">
+                                    <div class="single-tags pull-left">
+                                        <i class="fa fa-tags"></i>
+                                        <a href="#">Development</a>,
+                                        <a href="#">Maketing</a>
+                                    </div>
+                                    <div class="social-share pull-right">
+                                        <a href="#" ><i class="fa fa-facebook"></i></a>
+                                        <a href="#" ><i class="fa fa-twitter"></i></a>
+                                        <a href="#" ><i class="fa fa-google-plus"></i></a>
+                                        <a href="#" ><i class="fa fa-linkedin"></i></a>
+                                    </div>
+                                </div>
+                                <nav class="navigation post-navigation">
+                                    <div class="nav-links">
+                                        <div class="nav-previous">
+                                            <a href="#">
+                                                <span class="meta-nav"><i class="fa fa-angle-double-left"></i> Previous</span>
+                                                <span class="post-title">10 Ways To Design For The Human Brain</span>
+                                            </a>
+                                        </div>
+                                        <div class="nav-next">
+                                            <a href="#">
+                                                <span class="meta-nav">Next <i class="fa fa-angle-double-right"></i></span>
+                                                <span class="post-title">Mobile UX And User Expectations</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </nav>
+                                <div class="clearfix"></div>
+                            </div>
+                        </article>
+                        <!-- post close -->
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="main-sidebar">
+                        <aside class="widget widget_text">
+                            <h3 class="widget-title">简介</h3>
+                            <div class="tiny-border"></div>
+                            <div class="textwidget">
+                                <p th:text="${message.overview}">
+                                </p>
+                            </div>
+                        </aside>
+                        <aside class="widget widget_search">
+                            <form action="" class="search-form" method="get" role="search">
+                                <input type="search" name="s" value="" placeholder="Search …" class="search-field"/>
+                                <button class="search-submit" type="submit"><i class="fa fa-search"></i></button>
+                            </form>
+                        </aside>
+                        <aside class="widget widget_categories">
+                            <h3 class="widget-title">Categories</h3>
+                            <div class="tiny-border"></div>
+                            <ul>
+                                <li class="cat-item"><a href="#">Business Market</a> (5)</li>
+                                <li class="cat-item"><a href="#">Socials Network</a> (12)</li>
+                                <li class="cat-item"><a href="#">Team Work</a> (10)</li>
+                                <li class="cat-item"><a href="#">Product Services</a> (9)</li>
+                                <li class="cat-item"><a href="#">Socials Ecommerce</a> (6)</li>
+                            </ul>
+                        </aside>
+                        <aside class="widget widget_text">
+                            <div class="textwidget">
+                                <a href="#"><img src="/web/images/news/ads.jpg" alt="" class="img-responsive"/></a>
+                            </div>
+                        </aside>
+                        <aside class="widget widget_tag_cloud">
+                            <h3 class="widget-title">Tags</h3>
+                            <div class="tiny-border"></div>
+                            <div class="tagcloud">
+                                <a href="#">audio</a>
+                                <a href="#">gallery</a>
+                                <a href="#">image</a>
+                                <a href="#">music</a>
+                                <a href="#">photo</a>
+                                <a href="#">quote</a>
+                                <a href="#">text</a>
+                                <a href="#">video</a>
+                                <a href="#">vimeo</a>
+                                <a href="#">youtube</a>
+                            </div>
+                        </aside>
+                        <aside class="widget widget_archive">
+                            <h3 class="widget-title">Archives</h3>
+                            <div class="tiny-border"></div>
+                            <ul>
+                                <li><a href="#">September 2016</a> (14)</li>
+                                <li><a href="#">September 2015</a> (10)</li>
+                                <li><a href="#">January 2013</a> (5)</li>
+                                <li><a href="#">March 2012</a> (5)</li>
+                                <li><a href="#">January 2012</a> (6)</li>
+                                <li><a href="#">March 2011</a> (1)</li>
+                                <li><a href="#">October 2010</a> (1)</li>
+                            </ul>
+                        </aside>
+                        <aside class="widget widget_meta">
+                            <h3 class="widget-title">Meta</h3>
+                            <div class="tiny-border"></div>
+                            <ul>
+                                <li><a href="#">Site Admin</a></li>
+                                <li><a href="#">Log out</a></li>
+                                <li><a href="#">Entries <abbr>RSS</abbr></a></li>
+                                <li><a href="#">Comments <abbr>RSS</abbr></a></li>
+                                <li><a href="#">WordPress.org</a></li>
+                            </ul>
+                        </aside>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- content close -->
+</div>
+</body>
+</html>

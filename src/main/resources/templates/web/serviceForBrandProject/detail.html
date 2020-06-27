@@ -1,0 +1,132 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="web/fragments/brand/layout">
+<head>
+    <title th:text="${serviceForBrandProject.title}"></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="description" th:content="${serviceForBrandProject.overview}"/>
+    <meta name="keywords" th:content="${serviceForBrandProject.title}"/>
+    <meta name="author" th:content="${serviceForBrandProject.author}"/>
+    <link rel="icon" href="http://www.760pp.net/tpl/weixiu/favicon.ico"/>
+    <link rel="stylesheet" type="text/css" href="/web/css/index/css.css"/>
+    <script type="text/javascript" src="/web/js/jquery-1.8.3.min.js"></script>
+    <script src="/web/js/jquery.flexslider-min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.banner').flexslider({
+                directionNav: true,
+                pauseOnAction: false,
+                controlNav: false
+            });
+            jQuery.fn.searchdiv = function (options) {
+                var opts = $.extend({}, $.fn.searchdivli, options);
+                return this.each(function () {
+                    var $this = $(this);
+                    $this.addClass(opts.initClass);
+                    $this.focus(function () {
+
+                        var val = $this.val();
+                        $this.removeClass(opts.initClass);
+                        if (val == opts.initVal) {
+                            $this.val("");
+                        }
+                    });
+                    $this.blur(function () {
+                        var val = $this.val();
+                        if (val == "") {
+                            $this.addClass("search_color");
+                            $this.val(opts.initVal);
+                        }
+                    });
+                })
+            };
+
+        });
+
+        $(".Homexuqiu").click(function(){
+            $(".Cooperationbox").fadeIn(300);
+        });
+        $(".commonposition a").hover(function(){
+            $(this).find("span").show(300);
+        },function(){
+            $(this).find("span").hide(300);
+        })
+        $(window).scroll(function(){
+
+            if($(window).scrollTop()>1){
+                $(".commonposition").hide();
+            }else{
+                $(".commonposition").hide();
+            }
+
+        })
+
+    </script>
+
+    <!-- 切换 -->
+    <script type="text/javascript" src="/web/js/jquery.SuperSlide.2.1.1.js"></script>
+    <script type="text/javascript" src="/web/js/com.js"></script>
+    <style>.one-pan-tip { cursor: pointer;}.one-pan-tip::before {background-position: center;background-size: 100% 100%;background-repeat: no-repeat;box-sizing: border-box;width: 1em;height: 1em;margin: 0 1px .15em 1px;vertical-align: middle;display: inline-block;}.one-pan-tip-success::before {content: '';background-image: url(data:/web/images/index/png;)}</style>
+</head>
+<body>
+    <div layout:fragment="content">
+        <!--服务品牌-->
+        <div class="w1200">
+            <div class="f_l server">
+                <div class="title"> 服务品牌 </div>
+                <div class="brand">
+                    <div class="region w-sear-item ys1">
+                        <h2 style="margin-bottom:10px">地区：</h2>
+                        <div class="region_m in server_ys1 server_ys">
+                            <a href="/serviceForType/index.html" class="on">全国</a>
+                        </div>
+                        <span class="pic_icon pic_icon2" style="display: inline-block;"><img src="http://www.760pp.net/tpl/weixiu/images/box-icon.jpg" width="17" height="17"/></span> </div>
+                    <div class="region w-sear-item ys2">
+                        <h2 style="margin-bottom:10px">分类：</h2>
+                        <div class="region_m in server_ys2 server_ys">
+                            <a th:each="serviceForType,stat:${serviceForTypes}" th:href="${'/serviceForType/serviceList-' + serviceForType.id + '.html'}"
+                               th:class="${stat.index==0? 'on' : ''}"
+                               th:text="${serviceForType.typeName}"></a>
+                        </div>
+                        <span class="pic_icon pic_icon2" style="display: inline-block;"><img src="http://www.760pp.net/tpl/weixiu/images/box-icon.jpg" width="17" height="17"/></span> </div>
+                    <div class="brand_main1">
+                        <div class="brand_t1">
+                            <a th:each="serviceForBrand,stat:${serviceForBrands}" th:href="${'/serviceForBrand/index-' + serviceForBrand.id + '.html'}"
+                               th:text="${#strings.substring(serviceForBrand.brandName,0,3)}"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="news_deta f_r">
+                <div class="online">
+                    <h1>您当前位置：<a href="/">首页</a>&nbsp; &gt;&gt; &nbsp;<a href="http://www.760pp.net/news/list-3.html">空调维修</a></h1>
+                </div>
+                <div class="pic_list_xq">
+                    <h2 th:text="${serviceForBrandProject.title}">家用空调不制热是什么原因</h2>
+                    <h3>作者：<em th:text="${serviceForBrandProject.author}"></em>   &nbsp;&nbsp; 时间：<em th:text="${serviceForBrandProject.createTime}">2019-12-14 00:00:00</em></h3>
+                    <div class="bdsharebuttonbox bdshare-button-style0-16" style="margin-top:10px" data-bd-bind="1592723658493"><span style=" float:left;line-height:30px; margin-right:10px;">分享到:</span><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+                    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+                    <div class="pic_list_details" th:utext="${serviceForBrandProject.content}">
+                    </div>
+                    <div class="page_text" style="display: none">
+                        <p>下一篇：<a href="#">暂无</a></p>
+                        <p>上一篇：<a href="http://www.760pp.net/news/detail-4449.html">空调维修口诀技巧分享</a></p>
+                    </div>
+                </div>
+                <div class="title_bj">
+                    <div class="title3 f_l">相关文章</div>
+                </div>
+                <div class="news_tj">
+                    <ul>
+                        <li style="width:250px" th:each="serviceForBrandProject:${serviceForBrandProjects}">
+                            <a href="http://www.760pp.net/news/detail-4146.html" th:href="${'/serviceForBrandProject/detail_' + serviceForBrandProject.id + '.html'}"
+                               th:text="${serviceForBrandProject.title}"></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--banner-->
+</body>
+</html>

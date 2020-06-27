@@ -1,0 +1,26 @@
+server:
+  port: 8181
+  tomcat:
+    uri-encoding: UTF-8
+  compression:
+    enabled: true
+    mime-types: application/json,application/xml,text/html,text/xml,text/plain
+spring:
+  application:
+    name: 5i5j360
+  profiles:
+    active: dev
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML5
+    encoding: UTF-8
+    content-type: text/html
+    cache: false
+  devtools:
+    restart:
+      enabled: true
+  http:
+    multipart:
+      maxFileSize: 20MB
+      maxRequestSize: 20MB

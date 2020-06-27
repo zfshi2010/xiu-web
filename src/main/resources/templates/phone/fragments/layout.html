@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<title>Home</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<meta name="description" content=""/>
+	<meta name="author" content=""/>
+</head>
+
+<body>
+	<div layout:fragment="content">
+	</div>
+	<!-- footer begin -->
+	<div th:replace="phone/fragments/footer :: footer"></div>
+	<!-- footer close -->
+</body>
+<!--焦点图js-->
+<script src="/phone/js/jquery-1.9.1.min.js"></script>
+<script src="/phone/js/TouchSlide.1.1.js"></script>
+<script type="text/javascript">
+    TouchSlide({
+        slideCell:"#slides",
+        titCell:".hd ul", //开启自动分页 autoPage:true ，此时设置 titCell 为导航元素包裹层
+        mainCell:".bd ul",
+        effect:"leftLoop",
+        autoPage:true,//自动分页
+        autoPlay:false //自动播放
+    });
+</script>
+</html>

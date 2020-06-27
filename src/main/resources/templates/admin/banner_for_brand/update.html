@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html dir="ltr" xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="admin/fragments/layout">
+<head>
+    <title>服务品牌Banner设置</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="/admin/pagination/pagination.css" />
+    <script type="text/javascript" th:src="@{/scripts/validate/jquery.validate.min.js}"></script>
+    <script type="text/javascript" th:src="@{/scripts/validate/chinese.js}"></script>
+    <script type="text/javascript" th:src="@{/admin/jquery.form.js}"></script>
+    <script th:src="@{/admin/pagination/jquery.pagination.js}"></script>
+    <script th:src="@{/uedit/ueditor.config.js}" />
+    <script th:src="@{/uedit/ueditor.all.js}" />
+    <script th:src="@{/uedit/lang/zh-cn/zh-cn.js}" />
+    <script th:src="@{/admin/script/banner_for_brand/update.js}"></script>
+</head>
+<body>
+
+<div layout:fragment="content">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-12 d-flex no-block align-items-center">
+                <h4 class="page-title">服务品牌Banner设置</h4>
+                <div class="ml-auto text-right">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">首页</a></li>
+                            <li class="breadcrumb-item"><a href="/admin/serviceForBrand/index.html">品牌管理</a></li>
+                            <li class="breadcrumb-item active" aria-current="page"><a>服务品牌Banner设置</a></li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Container fluid  -->
+    <!-- ============================================================== -->
+    <div class="container-fluid">
+        <!-- ============================================================== -->
+        <!-- Start Page Content -->
+        <!-- ============================================================== -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <form class="form-horizontal" id="add-message-form" action="/userInfos/updatePerson" method="post">
+                        <div class="card-body">
+                            <h4 class="card-title">修改Banner</h4>
+                            <div class="form-group row">
+                                <label for="type" class="col-sm-3 text-right control-label col-form-label"><span style="color: red">*</span>类型</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control" name="type" id="type">
+                                        <option value="brand_banner" th:selected="${banner.type == 'brand_banner'}">Banner</option>
+                                        <option value="brand_logo" th:selected="${banner.type == 'brand_logo'}">logo</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-6 text-right control-label col-form-label">友情提示：
+                                    banner图建议尺寸：1920*550，logo建议尺寸：139*58
+                                </label>
+                            </div>
+                            <div class="form-group row">
+                                <label for="img" class="col-sm-3 text-right control-label col-form-label"><span style="color: red">*</span>图片</label>
+                                <div class="col-sm-8">
+                                    <input type="hidden" id="serviceForBrandId" name="serviceForBrandId" th:value="${serviceForBrandId}"/>
+                                    <input type="hidden" id="id" name="id" th:value="${banner.id}"/>
+                                    <input type="hidden" id="createTime" name="createTime" th:value="${banner.createTime}"/>
+                                    <img th:src="${banner.img}" width="844px" class="img-thumbnail" id="img-img"/>
+                                    <input type="file" class="hide" name="fileName" id="fileName" />
+                                    <input id="img" type="hidden" name="img" class="form-control" th:value="${banner.img}"/>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="title" class="col-sm-3 text-right control-label col-form-label"><span style="color: red">*</span>标题</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="title" name="title" placeholder="标题" th:value="${banner.title}"/>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="alt" class="col-sm-3 text-right control-label col-form-label"><span style="color: red">*</span>概述</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="alt" name="alt" placeholder="概述" th:value="${banner.alt}"/>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="author" class="col-sm-3 text-right control-label col-form-label"><span style="color: red">*</span>作者</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="author" name="author" placeholder="作者" th:value="${banner.author}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border-top">
+                            <div class="card-body">
+                                <button type="button" class="btn btn-primary" id="add-message-button">修改</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

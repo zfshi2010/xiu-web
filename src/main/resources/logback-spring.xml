@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+	<contextName>website</contextName>
+	<property name="log.path" value="subaozi.log"></property>
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>DEBUG</level>
+		</filter>
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %p - %m%n</pattern>
+		</encoder>
+	</appender>
+	<appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${log.path}</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+        	<fileNamePattern>subaozi-%d{yyyy-MM-dd}.log</fileNamePattern>
+        	<maxHistory>30</maxHistory>
+        	<totalSizeCap>100MB</totalSizeCap>
+    	</rollingPolicy>
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %p - %m%n</pattern>
+		</encoder>
+		<append>true</append>
+	</appender>
+	
+	<root level="info">
+		<appender-ref ref="console" />
+		<appender-ref ref="file" />
+  	</root>
+</configuration>

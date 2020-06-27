@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<body>
+<div th:fragment="footer">
+    <div class="footer_bj">
+        <div class="w1200 footer">
+            <p style="display: none"><em>热搜词：</em><a href="http://www.5i5j360.com/">年代售后</a><a href="http://www.5i5j360.com">格力空调维修</a><a href="http://www.5i5j360.com">华帝热水器维修</a><a href="http://www.5i5j360.com">林内热水器维修</a><a href="http://www.5i5j360.com">大金空调维修</a><a href="http://www.5i5j360.com">樱雪热水器维修</a></p>
+            <p><em>友情链接：</em>
+
+                <a th:each="blogroll:${blogrolls}" th:href="${blogroll.link}" th:text="${blogroll.name}" target="_blank"></a>
+
+            </p>
+        </div>
+    </div>
+    <div class="copy_bj"> Copyright （c）2019 版权所有 “我爱我家“生活服务平台 <a href="http://beian.miit.gov.cn/" target="_blank"> 京ICP备20005347号-1</a><a href="/aboutUs.html">关于我们</a>&nbsp;&nbsp;<a href="/sitemap.xml">网站地图</a> </div>
+    <div class="commonposition" style="display: none;"> <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=2076034503&amp;site=qq&amp;menu=yes" target="_blank" class="HomeQQ1"><span class="QQbggray1">QQ咨询</span></a> <a href="javascript:;" class="Homedianhua"><span class="dianhuabggray">13911909845</span></a><a href="/index.html" class="Hometop"></a> </div>
+</div>
+</body>
+</html>

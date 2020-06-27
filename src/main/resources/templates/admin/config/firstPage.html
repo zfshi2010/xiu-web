@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html dir="ltr" xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="admin/fragments/layout">
+<head>
+    <title>首页参数设置</title>
+    <meta charset="utf-8" />
+    <script type="text/javascript" th:src="@{/scripts/validate/jquery.validate.min.js}"></script>
+    <script type="text/javascript" th:src="@{/scripts/validate/chinese.js}"></script>
+    <script type="text/javascript" th:src="@{/admin/jquery.form.js}"></script>
+    <script th:src="@{/admin/script/config/firstPage.js}"></script>
+</head>
+<body>
+
+<div layout:fragment="content">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-12 d-flex no-block align-items-center">
+                <h4 class="page-title">首页参数设置</h4>
+                <div class="ml-auto text-right">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">首页</a></li>
+                            <li class="breadcrumb-item active" aria-current="page"><a>首页参数设置</a></li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Container fluid  -->
+    <!-- ============================================================== -->
+    <div class="container-fluid">
+        <!-- ============================================================== -->
+        <!-- Start Page Content -->
+        <!-- ============================================================== -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <form class="form-horizontal" id="saveForm">
+                        <div class="card-body">
+                            <div class="username row">
+                                <label for="title" class="col-sm-3 text-right control-label col-form-label"><span style="color: red">*</span>标题</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="title" name="title" placeholder="title Here" th:value="${sysConfig.title}"/>
+                                    <input type="hidden" id="id" name="id" th:value="${sysConfig.id}"/>
+                                    <input type="hidden" id="type" name="type" value="first_page" />
+                                    <input type="hidden" id="createTime" name="createTime" th:value="${sysConfig.createTime}"/>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="keywords" class="col-sm-3 text-right control-label col-form-label"><span style="color: red">*</span>关键字</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="keywords" name="keywords" placeholder="keywords Here" th:value="${sysConfig.keywords}"/>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="description" class="col-sm-3 text-right control-label col-form-label"><span style="color: red">*</span>描述</label>
+                                <div class="col-sm-9">
+                                    <textarea class="form-control" id="description" name="description" th:text="${sysConfig.description}"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="author" class="col-sm-3 text-right control-label col-form-label">作者</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="author" name="author" placeholder="author Name Here" th:value="${sysConfig.author}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border-top">
+                            <div class="card-body">
+                                <button type="button" class="btn btn-primary" id="saveButton">提交</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="web/fragments/layout">
+<head>
+    <title th:text="${firstPage.title}"></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="description" th:content="${firstPage.description}"/>
+    <meta name="keywords" th:content="${firstPage.keywords}"/>
+    <meta name="author" th:content="${firstPage.author}"/>
+    <link rel="icon" href="/favicon.ico"/>
+    <link rel="stylesheet" type="text/css" href="/web/css/index/css.css"/>
+    <script type="text/javascript" src="/web/js/jquery-1.8.3.min.js"></script>
+    <script src="/web/js/jquery.flexslider-min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.banner').flexslider({
+                directionNav: true,
+                pauseOnAction: false,
+                controlNav: false
+            });
+            jQuery.fn.searchdiv = function (options) {
+                var opts = $.extend({}, $.fn.searchdivli, options);
+                return this.each(function () {
+                    var $this = $(this);
+                    $this.addClass(opts.initClass);
+                    $this.focus(function () {
+
+                        var val = $this.val();
+                        $this.removeClass(opts.initClass);
+                        if (val == opts.initVal) {
+                            $this.val("");
+                        }
+                    });
+                    $this.blur(function () {
+                        var val = $this.val();
+                        if (val == "") {
+                            $this.addClass("search_color");
+                            $this.val(opts.initVal);
+                        }
+                    });
+                })
+            };
+
+        });
+
+        $(".Homexuqiu").click(function(){
+            $(".Cooperationbox").fadeIn(300);
+        });
+        $(".commonposition a").hover(function(){
+            $(this).find("span").show(300);
+        },function(){
+            $(this).find("span").hide(300);
+        })
+        $(window).scroll(function(){
+
+            if($(window).scrollTop()>1){
+                $(".commonposition").hide();
+            }else{
+                $(".commonposition").hide();
+            }
+
+        })
+
+    </script>
+    <!-- 切换 -->
+    <script type="text/javascript" src="/web/js/jquery.SuperSlide.2.1.1.js"></script>
+    <script type="text/javascript" src="/web/js/com.js"></script>
+    <style>.one-pan-tip { cursor: pointer;}.one-pan-tip::before {background-position: center;background-size: 100% 100%;background-repeat: no-repeat;box-sizing: border-box;width: 1em;height: 1em;margin: 0 1px .15em 1px;vertical-align: middle;display: inline-block;}.one-pan-tip-success::before {content: '';background-image: url(data:/web/images/index/png;)}</style>
+</head>
+<body>
+<div layout:fragment="content">
+    <!--服务品牌-->
+    <div class="w1200">
+        <div class="f_l server">
+            <div class="title"> 服务品牌 </div>
+            <div class="brand">
+                <div class="region w-sear-item ys1">
+                    <h2 style="margin-bottom:10px">地区：</h2>
+                    <div class="region_m in server_ys1 server_ys">
+                        <a href="/serviceForType/index.html" class="on">全国</a>
+                    </div>
+                    <span class="pic_icon pic_icon2" style="display: inline-block;"><img src="/web/images/index/box-icon.jpg" width="17" height="17"/></span> </div>
+                <div class="region w-sear-item ys2">
+                    <h2 style="margin-bottom:10px">分类：</h2>
+                    <div class="region_m in server_ys2 server_ys">
+                        <a th:each="serviceForType,stat:${serviceForTypes}" th:href="${'/serviceForType/serviceList-' + serviceForType.id + '.html'}"
+                           th:class="${stat.index==0? 'on' : ''}"
+                           th:text="${serviceForType.typeName}"></a>
+                    </div>
+                    <span class="pic_icon pic_icon2" style="display: inline-block;"><img src="/web/images/index/box-icon.jpg" width="17" height="17"/></span> </div>
+                <div class="brand_main1">
+                    <div class="brand_t1">
+                        <a th:each="serviceForBrand,stat:${serviceForBrands}" th:href="${'/serviceForBrand/index-' + serviceForBrand.id + '.html'}"
+                           th:text="${#strings.substring(serviceForBrand.brandName,0,3)}"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="news_deta f_r">
+            <div class="online">
+                <h1>您当前位置：<a href="/">首页</a>&nbsp; &gt;&gt; &nbsp;<a href="/aboutUs.html">关于我们</a></h1>
+            </div>
+            <div class="pic_list_xq">
+                <h2 >在线报修</h2>
+                <div class="pic_list_details" >
+                    <h3>在线报修信息提交成功！请您耐心等待，我们将第一时间与您联系！</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--banner-->
+</body>
+</html>
