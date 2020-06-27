@@ -42,49 +42,20 @@ public class PhoneGuestbookController extends BaseController {
     private BannerRepository bannerRepository;
 
     private String getFirstPage(ModelMap model) {
-        model.addAttribute("isFirstPage", true);
         SysConfig firstPage = sysConfigRepository.findByType(SysConfig.FIRST_PAGE);
         model.addAttribute("firstPage", firstPage);
-        addBlogroll(model);
-        setImg(model);
+        return "phone/guestbook/index";
+    }
 
-        List<Banner> adverts = bannerRepository.findByType(Banner.ADVERT);
-        model.addAttribute("advert", adverts.size() > 0? adverts.get(0) : new Banner());
-
-        List<Blogroll> blogrolls = blogrollRepository.findAll();
-        model.addAttribute("blogrolls", blogrolls);
-
-        List<ServiceForType> serviceForTypes = serviceForTypeRepository.findByIsMenu(false);
-        List<ServiceForType> serviceForTypesIsMenu = serviceForTypeRepository.findByIsMenu(true);
-        model.addAttribute("serviceForTypes", serviceForTypes);
-        model.addAttribute("serviceForTypesIsMenu", serviceForTypesIsMenu);
-
-        List<ServiceForBrand> serviceForBrands = new ArrayList<>();
-        if (serviceForTypes.size() > 0) {
-            serviceForBrands = serviceForBrandRepository.findByTypeId(serviceForTypes.get(0).getId());
-        }
-        model.addAttribute("serviceForBrands", serviceForBrands);
-
-        serviceForTypesIsMenu = serviceForTypesIsMenu.stream().map(serviceForType -> {
-            serviceForType.setServiceForTypeMessages(serviceForTypeMessageService.index(0,9, serviceForType.getId()).getContent());
-            return serviceForType;
-        }).collect(Collectors.toList());
-        List<ServiceForType> serviceForTypesIsMenu1;
-        List<ServiceForType> serviceForTypesIsMenu2;
-        if (serviceForTypesIsMenu.size() > 6) {
-            serviceForTypesIsMenu1 = serviceForTypesIsMenu.subList(0,6);
-            serviceForTypesIsMenu2 = serviceForTypesIsMenu.subList(6,serviceForTypesIsMenu.size());
-        } else {
-            serviceForTypesIsMenu1 = serviceForTypesIsMenu;
-            serviceForTypesIsMenu2 = new ArrayList<>();
-        }
-        model.addAttribute("serviceForTypesIsMenu1", serviceForTypesIsMenu1);
-        model.addAttribute("serviceForTypesIsMenu2", serviceForTypesIsMenu2);
-        return "web/index";
+    @RequestMapping("/index")
+    public String index(ModelMap model) throws Exception{
+        SysConfig firstPage = sysConfigRepository.findByType(SysConfig.FIRST_PAGE);
+        model.addAttribute("firstPage", firstPage);
+        return "phone/guestbook/index";
     }
 
     @RequestMapping("/save")
-    public String index(ModelMap model,Guestbook guestbook) throws Exception{
+    public String save(ModelMap model,Guestbook guestbook) throws Exception{
         if (StringUtils.isBlank(guestbook.getName())) {
             model.addAttribute("errorMessage", "您的姓名不能为空!");
             return getFirstPage(model);
@@ -113,39 +84,13 @@ public class PhoneGuestbookController extends BaseController {
 
         SysConfig firstPage = sysConfigRepository.findByType(SysConfig.FIRST_PAGE);
         model.addAttribute("firstPage", firstPage);
-        addBlogroll(model);
-        setImg(model);
-        List<ServiceForType> serviceForTypes = serviceForTypeRepository.findByIsMenu(false);
-        List<ServiceForType> serviceForTypesIsMenu = serviceForTypeRepository.findByIsMenu(true);
-        model.addAttribute("serviceForTypes", serviceForTypes);
-        model.addAttribute("serviceForTypesIsMenu", serviceForTypesIsMenu);
-
-        List<ServiceForBrand> serviceForBrands = new ArrayList<>();
-        if (serviceForTypes.size() > 0) {
-            serviceForBrands = serviceForBrandRepository.findByTypeId(serviceForTypes.get(0).getId());
-        }
-        model.addAttribute("serviceForBrands", serviceForBrands);
-
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
         String nowText = now.format(formatter);
         guestbook.setCreateTime(nowText);
         guestbookRepository.save(guestbook);
-        return "web/guestbook_success";
+        return "phone/guestbook/success";
     }
 
-    private void addBlogroll(ModelMap model) {
-        List<Blogroll> blogrolls = blogrollRepository.findAll();
-        model.addAttribute("blogrolls", blogrolls);
-    }
-
-    private void setImg(ModelMap model) {
-        List<Banner> banners = bannerRepository.findByType(Banner.BANNER);
-        model.addAttribute("banners", banners);
-        List<Banner> logos = bannerRepository.findByType(Banner.LOGO);
-        model.addAttribute("logo", logos.size() > 0? logos.get(0) : new Banner());
-        List<Banner> phones = bannerRepository.findByType(Banner.PHONE);
-        model.addAttribute("phone", phones.size() > 0? phones.get(0) : new Banner());
-    }
 }

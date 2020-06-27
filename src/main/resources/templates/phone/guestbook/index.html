@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="phone/fragments/layout">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0"/>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title th:text="${'在线报修_' + firstPage.title}"></title>
+    <meta name="description" th:content="${firstPage.description}"/>
+    <meta name="keywords" th:content="${firstPage.keywords}"/>
+    <meta name="author" th:content="${firstPage.author}"/>
+    <link rel="stylesheet" type="text/css" href="/phone/css/ltkj.css"/>
+</head>
+<body>
+    <div layout:fragment="content">
+        <div id="pgcontainer">
+            <!--头部的开始-->
+            <header>
+                <a class="fanhui" href="#" onclick="javascript:history.back(-1);"></a>
+                <strong>在线报修</strong>
+                <a href="#" class="menubtn"></a>
+                <!-- use captain icon for toggle menu -->
+                <div id="hamburgermenu">
+                    <ul>
+                        <li><a href="/phone.html">网站首页</a></li>
+                        <li><a href="/phone/serviceForType/indexForMenu.html">分类信息</a></li>
+                        <li><a href="/phone/serviceForType/index.html">品牌服务</a></li>
+                        <li><a href="/phone/aboutUs.html">关于我们</a></li>
+                    </ul>
+                </div>
+                <div class="overlay"></div>
+            </header>
+            <!--头部的结束-->
+
+            <!--主题内容的开始-->
+            <div class="zymain">
+                <!--更换内容开始-->
+                <div class="zy_nr">
+                    <h2>在线报修</h2>
+                    <p>
+                        <form class="form1" method="post" action="/phone/guestbook/save.html" name="myform" id="myform">
+                            <div class="form_l f_l">
+                                <div class="form_1">
+                                    <label>您的姓名<em>(*必填）</em></label>
+                                    <input name="name" id="name" type="text"/>
+                                </div>
+                                <div class="form_1">
+                                    <label>您的电话<em>(*必填）</em></label>
+                                    <input name="phone" id="phone" type="text"/>
+                                </div>
+                                <div class="form_1">
+                                    <label>地址</label>
+                                    <input name="address" id="address" type="text"/>
+                                </div>
+                                <div class="form_1">
+                                    <label>留言</label>
+                                    <input name="content" id="content" type="text"/>
+                                </div>
+                                <div class="form_1">
+                                    <label>报修内/外</label>
+                                    <select id="trade" name="trade">
+                                        <option value="1">报修内</option>
+                                        <option value="2">报修外</option>
+                                    </select>
+                                </div>
+                                <p th:text="${errorMessage}" style="color: red;" />
+                                <input name="" type="submit" class="button" value="提交留言"/>
+                            </div>
+                        </form>
+                    </p>
+                </div>
+                <!--更换内容结束-->
+            </div>
+            <!--主题内容的结束-->
+        </div>
+    </div>
+</body>
+
+</html>

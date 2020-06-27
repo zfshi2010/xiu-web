@@ -68,6 +68,6 @@ public class PhoneServiceForBrandController extends BaseController {
         List<ServiceForBrandProject> serviceForBrandProjects = serviceForBrandProjectRepository.findByServiceForBrandId(id);
         model.addAttribute("serviceForBrandProjects", serviceForBrandProjects);
 
-        return "web/serviceForBrand/index";
+        return "phone/serviceForBrand/index";
     }
 }

@@ -49,35 +49,14 @@ public class PhoneServiceForBrandMessageController extends BaseController {
     @RequestMapping("/detail_{id}")
     public String detail(ModelMap model, @PathVariable Long id) throws Exception{
         ServiceForBrandMessageVo serviceForBrandMessageVo = serviceForBrandMessageRepository.getOne(id).toVo();
-        model.addAttribute("serviceForBrandId", serviceForBrandMessageVo.getServiceForBrandId());
         model.addAttribute("serviceForBrandMessage", serviceForBrandMessageVo);
-
-        List<Banner> phones = bannerRepository.findByType(Banner.PHONE);
-        model.addAttribute("phone", phones.size() > 0? phones.get(0) : new Banner());
-
-        List<Banner> logos = bannerRepository.findByTypeAndServiceForBrandId(Banner.BRAND_LOGO, serviceForBrandMessageVo.getServiceForBrandId());
-        model.addAttribute("logo", logos.size() > 0? logos.get(0) : new Banner());
-
-        List<Banner> banners = bannerRepository.findByTypeAndServiceForBrandId(Banner.BRAND_BANNER, serviceForBrandMessageVo.getServiceForBrandId());
-        model.addAttribute("banners", banners);
 
         ServiceForBrand serviceForBrand = serviceForBrandRepository.findOne(serviceForBrandMessageVo.getServiceForBrandId());
         model.addAttribute("serviceForBrand", serviceForBrand);
 
-        List<ServiceForType> serviceForTypes = serviceForTypeRepository.findByIsMenu(false);
-        List<ServiceForType> serviceForTypesIsMenu = serviceForTypeRepository.findByIsMenu(true);
-        model.addAttribute("serviceForTypes", serviceForTypes);
-        model.addAttribute("serviceForTypesIsMenu", serviceForTypesIsMenu);
-
-        List<ServiceForBrand> serviceForBrands = new ArrayList<>();
-        if (serviceForTypes.size() > 0) {
-            serviceForBrands = serviceForBrandRepository.findByTypeId(serviceForTypes.get(0).getId());
-        }
-        model.addAttribute("serviceForBrands", serviceForBrands);
-
         List<ServiceForBrandMessage> serviceForBrandMessages = serviceForBrandMessageRepository.findByServiceForBrandId(serviceForBrandMessageVo.getServiceForBrandId());
         model.addAttribute("serviceForBrandMessages", serviceForBrandMessages);
-        return "web/serviceForBrandMessage/detail";
+        return "phone/serviceForBrandMessage/detail";
     }
 
 

@@ -45,22 +45,10 @@ public class PhoneIndexController extends BaseController {
 
     @RequestMapping("/phone/aboutUs")
     public String aboutUs(ModelMap model) throws Exception{
+        SysConfig firstPage = sysConfigRepository.findByType(SysConfig.FIRST_PAGE);
+        model.addAttribute("firstPage", firstPage);
         SysConfig aboutUs = sysConfigRepository.findByType(SysConfig.ABOUTUS);
         model.addAttribute("aboutUs", aboutUs);
-        addBlogroll(model);
-        setImg(model);
-        List<ServiceForType> serviceForTypes = serviceForTypeRepository.findByIsMenu(false);
-        List<ServiceForType> serviceForTypesIsMenu = serviceForTypeRepository.findByIsMenu(true);
-        model.addAttribute("serviceForTypes", serviceForTypes);
-        model.addAttribute("serviceForTypesIsMenu", serviceForTypesIsMenu);
-
-        List<ServiceForBrand> serviceForBrands = new ArrayList<>();
-        if (serviceForTypes.size() > 0) {
-            serviceForBrands = serviceForBrandRepository.findByTypeId(serviceForTypes.get(0).getId());
-        }
-        model.addAttribute("serviceForBrands", serviceForBrands);
-
-
         return "phone/aboutUs";
     }
 

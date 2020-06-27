@@ -2,10 +2,7 @@ package com.szf.controller.phone;
 
 import com.szf.controller.BaseController;
 import com.szf.entity.*;
-import com.szf.repository.BannerRepository;
-import com.szf.repository.BlogrollRepository;
-import com.szf.repository.ServiceForBrandRepository;
-import com.szf.repository.ServiceForTypeRepository;
+import com.szf.repository.*;
 import com.szf.service.ServiceForTypeMessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -31,10 +28,16 @@ public class PhoneServiceForTypeController extends BaseController {
     private ServiceForTypeMessageService serviceForTypeMessageService;
 
     @Autowired
+    private ServiceForTypeMessageRepository serviceForTypeMessageRepository;
+
+    @Autowired
     private BlogrollRepository blogrollRepository;
 
     @Autowired
     private BannerRepository bannerRepository;
+
+    @Autowired
+    private SysConfigRepository sysConfigRepository;
 
     private void setImg(ModelMap model) {
         List<Banner> banners = bannerRepository.findByType(Banner.BANNER);
@@ -45,61 +48,19 @@ public class PhoneServiceForTypeController extends BaseController {
         model.addAttribute("phone", phones.size() > 0? phones.get(0) : new Banner());
     }
 
-    @RequestMapping("/index")
-    public String index(ModelMap model) throws Exception{
-        addBlogroll(model);
-        setImg(model);
-
-        List<ServiceForType> serviceForTypes = serviceForTypeRepository.findByIsMenu(false);
-        List<ServiceForType> serviceForTypesIsMenu = serviceForTypeRepository.findByIsMenu(true);
-        model.addAttribute("serviceForTypes", serviceForTypes);
-        model.addAttribute("serviceForTypesIsMenu", serviceForTypesIsMenu);
-
-        List<ServiceForBrand> serviceForBrands = new ArrayList<>();
-        if (serviceForTypes.size() > 0) {
-            model.addAttribute("serviceForTypeId", serviceForTypes.get(0).getId());
-            ServiceForType serviceForType = serviceForTypeRepository.findOne(serviceForTypes.get(0).getId());
-            model.addAttribute("serviceForType", serviceForType);
-            serviceForBrands = serviceForBrandRepository.findByTypeId(serviceForTypes.get(0).getId());
-        } else {
-            model.addAttribute("serviceForType", new ServiceForType());
-        }
-        model.addAttribute("serviceForBrands", serviceForBrands);
-        return "web/serviceForType/index";
-    }
-
-    private void addBlogroll(ModelMap model) {
-        List<Blogroll> blogrolls = blogrollRepository.findAll();
-        model.addAttribute("blogrolls", blogrolls);
-    }
-
     /**
-     * 服务的，进去看所有品牌
+     * 分类信息首页（显示所有菜单类的分类信息）
      * @param model
-     * @param id
      * @return
      * @throws Exception
      */
-    @RequestMapping("/serviceList-{id}")
-    public String serviceList(ModelMap model, @PathVariable Long id) throws Exception{
-
-        model.addAttribute("serviceForTypeId", id);
-
-        addBlogroll(model);
-
-        setImg(model);
-
-        ServiceForType serviceForType = serviceForTypeRepository.findOne(id);
-        model.addAttribute("serviceForType", serviceForType);
-
-        List<ServiceForType> serviceForTypes = serviceForTypeRepository.findByIsMenu(false);
+    @RequestMapping("/indexForMenu")
+    public String indexForMenu(ModelMap model) throws Exception{
+        SysConfig firstPage = sysConfigRepository.findByType(SysConfig.FIRST_PAGE);
+        model.addAttribute("firstPage", firstPage);
         List<ServiceForType> serviceForTypesIsMenu = serviceForTypeRepository.findByIsMenu(true);
-        model.addAttribute("serviceForTypes", serviceForTypes);
         model.addAttribute("serviceForTypesIsMenu", serviceForTypesIsMenu);
-
-        List<ServiceForBrand> serviceForBrands = serviceForBrandRepository.findByTypeId(id);
-        model.addAttribute("serviceForBrands", serviceForBrands);
-        return "web/serviceForType/index";
+        return "phone/serviceForType/indexForMenu";
     }
 
     /**
@@ -116,26 +77,48 @@ public class PhoneServiceForTypeController extends BaseController {
         ServiceForType serviceForType = serviceForTypeRepository.findOne(id);
         model.addAttribute("serviceForType", serviceForType);
 
-        addBlogroll(model);
-
-        setImg(model);
-
-        List<ServiceForType> serviceForTypes = serviceForTypeRepository.findByIsMenu(false);
         List<ServiceForType> serviceForTypesIsMenu = serviceForTypeRepository.findByIsMenu(true);
-        model.addAttribute("serviceForTypes", serviceForTypes);
         model.addAttribute("serviceForTypesIsMenu", serviceForTypesIsMenu);
+        model.addAttribute("serviceForTypeMessages", serviceForTypeMessageRepository.findByServiceForTypeId(id));
+        return "phone/serviceForType/messageList";
+    }
 
-        List<ServiceForBrand> serviceForBrands = new ArrayList<>();
-        if (serviceForTypes.size() > 0) {
-            serviceForBrands = serviceForBrandRepository.findByTypeId(serviceForTypes.get(0).getId());
-        }
+    /**
+     * 服务分类首页（显示所有非菜单类的分类信息）
+     * @param model
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("/index")
+    public String index(ModelMap model) throws Exception{
+        SysConfig firstPage = sysConfigRepository.findByType(SysConfig.FIRST_PAGE);
+        model.addAttribute("firstPage", firstPage);
+        List<ServiceForType> serviceForTypes = serviceForTypeRepository.findByIsMenu(false);
+        model.addAttribute("serviceForTypes", serviceForTypes);
+        return "phone/serviceForType/index";
+    }
+
+    private void addBlogroll(ModelMap model) {
+        List<Blogroll> blogrolls = blogrollRepository.findAll();
+        model.addAttribute("blogrolls", blogrolls);
+    }
+
+    /**
+     * 服务的，进去看所有品牌
+     * @param model
+     * @param id
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("/serviceList-{id}")
+    public String serviceList(ModelMap model, @PathVariable Long id) throws Exception{
+        ServiceForType serviceForType = serviceForTypeRepository.findOne(id);
+        model.addAttribute("serviceForType", serviceForType);
+        List<ServiceForType> serviceForTypes = serviceForTypeRepository.findByIsMenu(false);
+        model.addAttribute("serviceForTypes", serviceForTypes);
+        List<ServiceForBrand> serviceForBrands = serviceForBrandRepository.findByTypeId(id);
         model.addAttribute("serviceForBrands", serviceForBrands);
-
-        Page<ServiceForTypeMessage> serviceForTypeMessagePage = serviceForTypeMessageService.index(0,10, id);
-
-        model.addAttribute("serviceForTypeMessagePage", serviceForTypeMessagePage);
-        model.addAttribute("totalPages", serviceForTypeMessagePage.getTotalPages() ==0 ? 1 : serviceForTypeMessagePage.getTotalPages());
-        return "web/serviceForType/indexForMenu";
+        return "phone/serviceForType/brandList";
     }
 
     /**

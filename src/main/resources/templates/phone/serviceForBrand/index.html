@@ -5,10 +5,10 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0"/>
   <meta name="apple-mobile-web-app-capable" content="yes" />
-  <title th:text="${firstPage.title}"></title>
-  <meta name="description" th:content="${firstPage.description}"/>
-  <meta name="keywords" th:content="${firstPage.keywords}"/>
-  <meta name="author" th:content="${firstPage.author}"/>
+  <title th:text="${serviceForBrand.title}"></title>
+  <meta name="description" th:content="${serviceForBrand.description}"/>
+  <meta name="keywords" th:content="${serviceForBrand.keywords}"/>
+  <meta name="author" th:content="${serviceForBrand.author}"/>
   <link rel="stylesheet" type="text/css" href="/phone/css/ltkj.css"/>
 </head>
 <body>
@@ -24,8 +24,6 @@
      </div>
    <div class="clear"></div>
 </div>
-
-
 <!--首页头部的结束-->
 
 <!--nav的开始-->
@@ -36,7 +34,6 @@
     <li><a href="/phone/serviceForType/index.html">品牌服务</a></li>
   </ul>
 </div>
-
 <!--nav的结束-->
 
 <!--ban图片的开始-->
@@ -74,7 +71,7 @@
 
 <!--关于我们结束-->
 
-<!--服务项目开始-->
+<!--成功案例开始-->
 <div class="fwxm">
   <!--标题开始-->
   <div class="lgywm_title">
@@ -82,42 +79,19 @@
     <div class="lwenzi"><p><strong>服务项目</strong><br />SERVICES</p></div>
   </div>
   <!--标题结束-->
-  <div class="fwxm_nr">
+  <div class="cgal_nr">
      <ul>
-       <li th:each="serviceForType,stat:${serviceForTypes}" th:href="${'/phone/serviceForType/serviceList-' + serviceForType.id + '.html'}">
-         <div class="lzj"><img th:src="${'/phone/images/shouji_2' + stat.index + '.jpg'}"  alt="我爱我家生活网"/></div><em th:text="${serviceForType.typeName}"></em>
+       <li th:each="serviceForBrandProject,stat:${serviceForBrandProjects}" >
+         <a th:href="${'/phone/serviceForBrandProject/detail_' + serviceForBrandProject.id + '.html'}">
+           <div class="lzj"><img th:src="${serviceForBrandProject.img}"  th:alt="${serviceForBrandProject.title}"/></div>
+           <em th:text="${serviceForBrandProject.title}"></em>
+         </a>
        </li>
        <div class="clear"></div>
      </ul>
   </div>
    <!--按钮更多开始-->
-  <div class="angd" style="display: none;"><a href="/phone/serviceForType/index.html#">了解更多 &gt;&gt; </a></div>
-  <!--按钮更多结束-->
-
-</div>
-<!--服务项目结束-->
-
-<!--成功案例开始-->
-<div class="fwxm" style="display: none;">
-  <!--标题开始-->
-  <div class="lgywm_title">
-    <div class="xian"></div>
-    <div class="lwenzi"><p><strong>成功案例</strong><br />CASES</p></div>
-  </div>
-  <!--标题结束-->
-  <div class="cgal_nr">
-     <ul>
-       <li><a href="#"><div class="lzj"><img src="/phone/images/shouji_37.jpg"  /></div>360天网营销</a></li>
-       <li><a href="#"><div class="lzj"><img src="/phone/images/shouji_37.jpg"  /></div>360天网营销</a></li>
-       <li><a href="#"><div class="lzj"><img src="/phone/images/shouji_37.jpg"  /></div>360天网营销</a></li>
-       <li><a href="#"><div class="lzj"><img src="/phone/images/shouji_37.jpg"  /></div>360天网营销</a></li>
-       <li><a href="#"><div class="lzj"><img src="/phone/images/shouji_37.jpg"  /></div>360天网营销</a></li>
-       <li><a href="#"><div class="lzj"><img src="/phone/images/shouji_37.jpg"  /></div>360天网营销</a></li>
-       <div class="clear"></div>
-     </ul>
-  </div>
-   <!--按钮更多开始-->
-  <div class="angd"><a href="#">了解更多 &gt;&gt; </a></div>
+  <div class="angd" style="display: none;"><a href="#">了解更多 &gt;&gt; </a></div>
   <!--按钮更多结束-->
 
 </div>
@@ -128,15 +102,18 @@
   <!--标题开始-->
   <div class="lgywm_title">
     <div class="xian"></div>
-    <div class="lwenzi"><p><strong>服务信息</strong><br />INFO</p></div>
+    <div class="lwenzi"><p><strong>维修常识</strong><br />KNOWLEDEGE</p></div>
   </div>
   <!--标题结束-->
   <div class="xwzx_nr">
      <ul>
-       <li th:each="serviceForTypesIsMenu,stat:${serviceForTypesIsMenu1}">
-          <a th:href="${'/phone/serviceForType/list-' + serviceForTypesIsMenu.id + '.html'}"><div class="lzj"><img th:src="${serviceForTypesIsMenu.img}"  th:alt="${serviceForTypesIsMenu.title}"/></div>
-          <h3 th:text="${serviceForTypesIsMenu.title}"></h3>
-          <p th:text="${serviceForTypesIsMenu.description}"></p></a>
+       <li th:each="serviceForBrandMessage,stat:${serviceForBrandMessages}">
+          <a th:href="${'/phone/serviceForBrandMessage/detail_' + serviceForBrandMessage.id + '.html'}">
+            <div class="lzj">
+              <img />
+            </div>
+          <h3 th:text="${serviceForBrandMessage.title}"></h3>
+          <p th:text="${serviceForBrandMessage.overview}"></p></a>
        </li>
        <div class="clear"></div>
      </ul>
@@ -144,21 +121,6 @@
   <!--按钮更多开始-->
   <div class="angd" style="display: none"><a href="#">了解更多 &gt;&gt; </a></div>
   <!--按钮更多结束-->
-  
-  <div>
-    <img th:src="${advert.img}" th:alt="${advert.alt}"/>
-  </div>
-
-  <div class="xwzx_nr">
-    <ul>
-      <li th:each="serviceForTypesIsMenu,stat:${serviceForTypesIsMenu2}">
-        <a th:href="${'/phone/serviceForType/list-' + serviceForTypesIsMenu.id + '.html'}"><div class="lzj"><img th:src="${serviceForTypesIsMenu.img}"  th:alt="${serviceForTypesIsMenu.title}"/></div>
-          <h3 th:text="${serviceForTypesIsMenu.title}"></h3>
-          <p th:text="${serviceForTypesIsMenu.description}"></p></a>
-      </li>
-      <div class="clear"></div>
-    </ul>
-  </div>
 </div>
 <!--新闻中心结束-->
 
