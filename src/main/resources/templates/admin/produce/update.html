@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html dir="ltr" xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="admin/fragments/layout">
+<head>
+    <title>产品信息修改</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="/admin/pagination/pagination.css" />
+    <script type="text/javascript" th:src="@{/scripts/validate/jquery.validate.min.js}"></script>
+    <script type="text/javascript" th:src="@{/scripts/validate/chinese.js}"></script>
+    <script type="text/javascript" th:src="@{/admin/jquery.form.js}"></script>
+    <script th:src="@{/admin/pagination/jquery.pagination.js}"></script>
+    <script type="text/javascript" charset="utf-8" th:src="@{/ueditor/ueditor.config.js}"></script>
+    <script type="text/javascript" charset="utf-8" th:src="@{/ueditor/ueditor.all.min.js}"></script>
+    <script type="text/javascript" charset="utf-8" th:src="@{/ueditor/lang/zh-cn/zh-cn.js}"></script>
+    <script th:src="@{/admin/script/produce/update.js}"></script>
+</head>
+<body>
+
+<div layout:fragment="content">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-12 d-flex no-block align-items-center">
+                <h4 class="page-title">修改产品信息</h4>
+                <div class="ml-auto text-right">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">首页</a></li>
+                            <li class="breadcrumb-item active" aria-current="page"><a>产品信息修改</a></li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Container fluid  -->
+    <!-- ============================================================== -->
+    <div class="container-fluid">
+        <!-- ============================================================== -->
+        <!-- Start Page Content -->
+        <!-- ============================================================== -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <form class="form-horizontal" id="add-message-form" action="/userInfos/updatePerson" method="post">
+                        <div class="card-body">
+                            <h4 class="card-title">修改产品信息</h4>
+                            <div class="form-group row">
+                                <label for="productFieldId" class="col-sm-3 text-right control-label col-form-label"><span style="color: red">*</span>产品领域</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" id="productFieldId" name="productFieldId">
+                                        <option value="">请选择所属领域</option>
+                                        <option th:each="productField,stat:${productFields}" th:value="${productField.id}" th:text="${productField.name}" th:selected="${productField.id==produce.productFieldId}">
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="productTypeId" class="col-sm-3 text-right control-label col-form-label"><span style="color: red">*</span>产品类型</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" id="productTypeId" name="productTypeId">
+                                        <option value="">请选择所属类型</option>
+                                        <option th:each="productType,stat:${productTypes}" th:value="${productType.id}" th:text="${productType.name}" th:selected="${productType.id==produce.productTypeId}">
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="img" class="col-sm-3 text-right control-label col-form-label"><span style="color: red">*</span>产品图片</label>
+                                <div class="col-sm-8">
+                                    <img th:src="${produce.img}" width="259px" height="290px" class="img-thumbnail" id="img-img"/>
+                                    <input type="file" class="hide" name="fileName" id="fileName" />
+                                    <input id="img" type="hidden" name="img" class="form-control" th:value="${produce.img}"/>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="img" class="col-sm-3 text-right control-label col-form-label"><span style="color: red">*</span>产品参数信息</label>
+                                <div class="col-sm-8">
+                                    <img th:src="${produce.paramImg}" width="259px" height="290px" class="img-thumbnail" id="paramImg-img"/>
+                                    <input id="paramImg" type="hidden" name="paramImg" class="form-control" th:value="${produce.paramImg}"/>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="name" class="col-sm-3 text-right control-label col-form-label"><span style="color: red">*</span>产品名称</label>
+                                <div class="col-sm-9">
+                                    <input type="hidden" id="id" name="id" th:value="${produce.id}"/>
+                                    <input type="hidden" id="createTime" name="createTime" th:value="${produce.createTime}"/>
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="name Here" th:value="${produce.name}"/>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="overview" class="col-sm-3 text-right control-label col-form-label"><span style="color: red">*</span>概述</label>
+                                <div class="col-sm-9">
+                                    <textarea class="form-control" id="overview" name="overview" th:utext="${produce.overview}"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="content" class="col-sm-3 text-right control-label col-form-label"><span style="color: red">*</span>产品内容介绍</label>
+                                <div class="col-sm-8">
+                                    <div style="">
+                                        <script id="editor" type="text/plain" style="width:95%;height:450px;"></script>
+                                    </div>
+                                    <textarea class="form-control" id="content" name="content" style="height: 609px;resize:none;display: none;"
+                                              th:text="${produce.content}"
+                                    ></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                              <label for="video" class="col-sm-3 text-right control-label col-form-label">视频文件</label>
+                              <div class="col-sm-8">
+                                  <video th:src="${produce.video}" controls="controls" width="259px" height="290px" class="img-thumbnail" id="video-img"/>
+                                  <input id="video" type="hidden" name="video" class="form-control" th:value="${produce.video}"/>
+                               </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="author" class="col-sm-3 text-right control-label col-form-label"><span style="color: red">*</span>作者</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="author" name="author" placeholder="作者" th:value="${produce.author}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border-top">
+                            <div class="card-body">
+                                <button type="button" class="btn btn-primary" id="add-message-button">修改</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

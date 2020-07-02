@@ -1,12 +1,14 @@
 $(function(){
+
     UE.Editor.prototype._bkGetActionUrl = UE.Editor.prototype.getActionUrl;
     UE.Editor.prototype.getActionUrl = function(action) {
-        if (action == 'uploadimage' || action == 'uploadscrawl' || action == 'uploadimage') {
-            return '/imgUpload';
+        if (action == 'uploadimage') {
+            return '/upload';
         } else {
             return this._bkGetActionUrl.call(this, action);
         }
     }
+
     var ue = UE.getEditor('editor',{toolbar: [
             [
                 'source', '|', 'undo', 'redo', '|',
@@ -17,8 +19,7 @@ $(function(){
                 'customstyle', '|',
                 'directionalityltr', 'directionalityrtl', 'indent', '|',
                 'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|', 'touppercase', 'tolowercase', '|',
-                'link', 'unlink', 'anchor', '|', 'imagenone', 'imageleft', 'imageright', 'imagecenter', '|',
-                'simpleupload', 'emotion', '|',
+                'link', 'unlink', 'anchor', '|', 'imagenone', 'imageleft', 'imageright', 'imagecenter', '|','simpleupload', 'insertimage','emotion', '|',
                 'horizontal', 'date', 'time', 'spechars', 'snapscreen', 'wordimage', '|',
                 'inserttable', 'deletetable'
             ]

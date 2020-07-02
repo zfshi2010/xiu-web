@@ -8,11 +8,11 @@
         <version>1.4.7.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.szf</groupId>
-    <artifactId>xiu-web</artifactId>
+    <groupId>com.avic</groupId>
+    <artifactId>avic-web</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>xiu-web</name>
-    <description>企业网站</description>
+    <name>avic-web</name>
+    <description>中航国际厦门公司进口机电产品微信平台服务号</description>
 
     <properties>
         <java.version>1.8</java.version>
@@ -106,6 +106,28 @@
             <version>1.9.22</version>
         </dependency>
 
+
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.9</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>1.3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20160810</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -119,7 +141,7 @@
         </dependency>
     </dependencies>
     <build>
-        <finalName>xiu-web</finalName>
+        <finalName>avic-web</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

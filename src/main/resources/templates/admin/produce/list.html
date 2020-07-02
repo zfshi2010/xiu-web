@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html dir="ltr" xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="admin/fragments/layout">
+<head>
+    <title>产品列表</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="/admin/pagination/pagination.css" />
+    <script th:src="@{/admin/pagination/jquery.pagination.js}"></script>
+    <script th:src="@{/admin/script/produce/list.js}"></script>
+</head>
+<body>
+
+<div layout:fragment="content">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-12 d-flex no-block align-items-center">
+                <h4 class="page-title">产品列表</h4>
+                <div class="ml-auto text-right">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">首页</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">产品列表</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Container fluid  -->
+    <!-- ============================================================== -->
+    <div class="container-fluid">
+        <!-- ============================================================== -->
+        <!-- Start Page Content -->
+        <!-- ============================================================== -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="panel">
+                            <div class="panel-body">
+                                <form class="form-inline">
+                                    <div class="form-group col-md-2">
+                                        <input type="text" class="form-control" id="name" name="name" placeholder="产品名称"/>
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <select class="form-control" id="productFieldId" name="productFieldId">
+                                            <option value="">请选择所属领域</option>
+                                            <option th:each="productField,stat:${productFields}" th:value="${productField.id}" th:text="${productField.name}">
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <select class="form-control" id="productTypeId" name="productTypeId">
+                                            <option value="">请选择所属类型</option>
+                                            <option th:each="productType,stat:${productTypes}" th:value="${productType.id}" th:text="${productType.name}">
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <button type="button" class="btn btn-primary" id="searchBtn">查询</button>
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <a type="button" class="btn btn-primary" th:href="${'/admin/produce/add.html'}" id="addUserInf">新增</a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="zero_config" class="table table-striped table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>缩略图</th>
+                                    <th>产品名称</th>
+                                    <th>作者</th>
+                                    <th>创建时间</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody id="tbodyContent">
+                                <tr>
+                                    <td>Tiger Nixon</td>
+                                    <td>System Architect</td>
+                                    <td>Edinburgh</td>
+                                    <td>$320,800</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <div class="tableFootLine">
+                                <div class="pagebarList pagination"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

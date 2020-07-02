@@ -7,7 +7,7 @@ server:
     mime-types: application/json,application/xml,text/html,text/xml,text/plain
 spring:
   application:
-    name: 5i5j360
+    name: avic
   profiles:
     active: dev
   thymeleaf:

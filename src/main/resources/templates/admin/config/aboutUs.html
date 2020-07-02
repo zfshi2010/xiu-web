@@ -7,9 +7,11 @@
     <script type="text/javascript" th:src="@{/scripts/validate/jquery.validate.min.js}"></script>
     <script type="text/javascript" th:src="@{/scripts/validate/chinese.js}"></script>
     <script type="text/javascript" th:src="@{/admin/jquery.form.js}"></script>
-    <script th:src="@{/uedit/ueditor.config.js}" />
-    <script th:src="@{/uedit/ueditor.all.js}" />
-    <script th:src="@{/uedit/lang/zh-cn/zh-cn.js}" />
+    <script type="text/javascript" charset="utf-8" th:src="@{/ueditor/ueditor.config.js}"></script>
+    <script type="text/javascript" charset="utf-8" th:src="@{/ueditor/ueditor.all.min.js}"></script>
+    <script type="text/javascript" charset="utf-8" th:src="@{/ueditor/lang/zh-cn/zh-cn.js}"></script>
+
+
     <script th:src="@{/admin/script/config/aboutUs.js}"></script>
 </head>
 <body>
@@ -72,9 +74,7 @@
                             <div class="form-group row">
                                 <label for="content" class="col-sm-3 text-right control-label col-form-label"><span style="color: red">*</span>内容</label>
                                 <div class="col-sm-8">
-                                    <div style="">
-                                        <script id="editor" type="text/plain"></script>
-                                    </div>
+                                    <script id="editor" type="text/plain" style="width:95%;height:450px;"></script>
                                     <textarea class="form-control" id="content" name="content" style="height: 609px;resize:none;display: none;" th:text="${sysConfig.content}"></textarea>
                                 </div>
                             </div>
