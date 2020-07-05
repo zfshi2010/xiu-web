@@ -37,7 +37,7 @@ var getOpt = function(data){
 //分页开始
 var currentPageData = null ;
 var pageaction = function(){
-    $.get('/user/index?t='+new Date().getTime(),{size:10,username:$("#username").val()},function(data){
+    $.get('/api/user/index?t='+new Date().getTime(),{size:10,username:$("#username").val()},function(data){
         currentPageData = data.data.content;
         $(".pagination").pagination(data.data.totalElements, getOpt(data));
     });
@@ -49,7 +49,7 @@ var pageselectCallback = function(page_index, jq, size){
         fillData(currentPageData);
         currentPageData = null;
     }else {
-        $.get('/user/index?t='+new Date().getTime(),{size:size,page:page_index, username:$("#username").val()
+        $.get('/api/user/index?t='+new Date().getTime(),{size:size,page:page_index, username:$("#username").val()
         },function(data){
             fillData(data.data.content);
         });
@@ -65,9 +65,8 @@ function fillData(data){
             <td>${v.username}</td>
             <td>${v.gender}</td>
             <td>${v.phone}</td>
-            <td>${v.address}</td>
             <td>
-				<a class="btn btn-info btn-sm" href="javascript:void(0)" onclick="edit('${v.id}')">修改</a>
+				<a class="btn btn-info btn-sm" href="/admin/user/update.html?id=${v.id}">修改</a>
 				<a class="btn btn-info btn-sm" href="javascript:void(0)" onclick="del('${v.id}')">删除</a>
 			</td>
        </tr>` ;
@@ -77,4 +76,23 @@ function fillData(data){
 
 function closeDialog() {
     artdialog.close();
+}
+
+
+function del(id){
+    if(!confirm("您确定删除此记录吗？")){
+        return false;
+    }
+    $.ajax({
+        url: "/api/user/delete?id=" + id,
+        type: 'DELETE',
+        success: function(data) {
+            if (data.status == 'success') {
+                alert("删除成功");
+                window.self.location = '/admin/user/index.html';
+            } else {
+                alert(data.message);
+            }
+        }
+    });
 }

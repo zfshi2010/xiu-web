@@ -4,6 +4,8 @@ import lombok.Data;
 
 import javax.persistence.Column;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 留言板
@@ -32,5 +34,7 @@ public class GuestbookVo implements Serializable {
     private String content;
 
     private String createTime;
+
+    private List<GuestbookParameterValueVo> guestbookParameterValues = new ArrayList<>();
 
 }

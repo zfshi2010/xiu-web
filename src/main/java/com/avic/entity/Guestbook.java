@@ -40,6 +40,12 @@ public class Guestbook implements Serializable {
     @Column(length = 20)
     private String createTime;
 
+    public Guestbook(){}
+
+    public Guestbook(GuestbookVo guestbookVo) {
+        BeanUtils.copyProperties(guestbookVo, this);
+    }
+
     public GuestbookVo toVo() {
         GuestbookVo guestbookVo = new GuestbookVo();
         BeanUtils.copyProperties(this, guestbookVo);

@@ -53,13 +53,13 @@
                             <h4 class="card-title">在线选型详情</h4>
                             <div class="form-group row">
                                 <label for="measurementTaskName" class="col-sm-3 text-right control-label col-form-label"><span style="color: red">*</span>测量任务</label>
-                                <div class="col-sm-8">
+                                <div class="col-sm-9">
                                     <input type="text" class="form-control" id="measurementTaskName" name="measurementTaskName"  th:value="${guestbook.measurementTaskName}" disabled="disabled"/>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="measurementRange" class="col-sm-3 text-right control-label col-form-label"><span style="color: red">*</span>测量范围</label>
-                                <div class="col-sm-8">
+                                <div class="col-sm-9">
                                     <input type="text" class="form-control" id="measurementRange" name="measurementRange" th:value="${guestbook.measurementRange}" disabled="disabled"/>
                                 </div>
                             </div>
@@ -70,15 +70,22 @@
                                 </div>
                             </div>
 
+                            <div class="form-group row" th:each="guestbookParameterValue,stat:${guestbookParameterValues}">
+                                <label for="textureName" class="col-sm-3 text-right control-label col-form-label"><span th:text="${guestbookParameterValue.parameterName}">材质</span></label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" th:if="${guestbookParameterValue.ifInput}" th:value="${guestbookParameterValue.parameterValueName + '，用户收入：' + guestbookParameterValue.content}" disabled="disabled"/>
+                                    <input type="text" class="form-control" th:if="${!guestbookParameterValue.ifInput}" th:value="${guestbookParameterValue.parameterValueName}" disabled="disabled"/>
+                                </div>
+                            </div>
                             <div class="form-group row">
                                 <label for="name" class="col-sm-3 text-right control-label col-form-label"><span style="color: red">*</span>公司</label>
-                                <div class="col-sm-8">
+                                <div class="col-sm-9">
                                     <input type="text" class="form-control" id="companyName" name="companyName" placeholder="公司" th:value="${guestbook.companyName}" disabled="disabled"/>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="name" class="col-sm-3 text-right control-label col-form-label"><span style="color: red">*</span>姓名</label>
-                                <div class="col-sm-8">
+                                <div class="col-sm-9">
                                     <input type="text" class="form-control" id="name" name="name" placeholder="姓名" th:value="${guestbook.name}" disabled="disabled"/>
                                 </div>
                             </div>
@@ -91,7 +98,7 @@
                             <div class="form-group row">
                                 <label for="content" class="col-sm-3 text-right control-label col-form-label">内容</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="content" name="content" placeholder="author Name Here" th:value="${guestbook.content}" disabled="disabled"/>
+                                    <textarea id="content" class="form-control" name="content" th:text="${guestbook.content}" disabled="disabled"></textarea>
                                 </div>
                             </div>
                             <div class="form-group row">

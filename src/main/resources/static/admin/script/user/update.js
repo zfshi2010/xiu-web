@@ -18,7 +18,7 @@ $(function(){
         if($('#add-message-form').valid()){
             $.ajax({
                 type: "POST",
-                url: "/api/user/save",
+                url: "/api/user/user",
                 data: $("#add-message-form").serialize(),
                 headers: {"Content-type": "application/x-www-form-urlencoded;charset=UTF-8"},
                 success: function (data) {

@@ -2,8 +2,10 @@ package com.avic.controller.admin;
 
 import com.avic.controller.BaseController;
 import com.avic.entity.Guestbook;
+import com.avic.entity.GuestbookParameterValue;
 import com.avic.entity.MeasurementTask;
 import com.avic.entity.Texture;
+import com.avic.repository.GuestbookParameterValueRepository;
 import com.avic.repository.GuestbookRepository;
 import com.avic.repository.MeasurementTaskRepository;
 import com.avic.repository.TextureRepository;
@@ -12,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/admin/guestbook")
@@ -25,6 +29,9 @@ public class AdminGuestbookController extends BaseController {
 
     @Autowired
     private TextureRepository textureRepository;
+
+    @Autowired
+    private GuestbookParameterValueRepository guestbookParameterValueRepository;
 
     @RequestMapping("/index")
     public String index() throws Exception{
@@ -51,6 +58,8 @@ public class AdminGuestbookController extends BaseController {
             }
         }
 
+        List<GuestbookParameterValue> guestbookParameterValues = guestbookParameterValueRepository.findByGuestbookId(id);
+        model.addAttribute("guestbookParameterValues", guestbookParameterValues);
         model.addAttribute("guestbook", guestbookVo);
         return "admin/guestbook/detail";
     }

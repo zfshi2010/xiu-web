@@ -12,4 +12,12 @@ $(function () {
             }
         });
     })
+    $('.parameter').change(function () {
+        if($(this).find("option:selected").attr('ifInput') == 'true') {
+            $(this).next().find('.content').show();
+        } else {
+            $(this).next().find('.content').hide();
+        }
+        $(this).next().find('.ifInput').val($(this).find("option:selected").attr('ifInput'));
+    });
 })

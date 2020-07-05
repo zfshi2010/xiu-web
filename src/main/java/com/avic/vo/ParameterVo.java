@@ -5,6 +5,8 @@ import org.springframework.beans.BeanUtils;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 参数
@@ -19,6 +21,8 @@ public class ParameterVo implements Serializable {
     private String author;
 
     private String createTime;
+
+    private List<ParameterValueVo> parameterValues = new ArrayList<>();
 
 
 }

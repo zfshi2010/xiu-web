@@ -50,7 +50,8 @@ public class AdminIndexController extends BaseController {
         } else {
             if (user.getPwd().equals(password)) {
                 request.getSession().setAttribute("username", user.getUsername());
-                return "redirect:/admin/config/firstPage";
+                request.getSession().setAttribute("roleType", user.getRoleType().toString());
+                return "redirect:/admin/config/aboutUs";
             } else {
                 model.addAttribute("errorMessage", "密码错误，请仔细核对！");
                 return "admin/login";

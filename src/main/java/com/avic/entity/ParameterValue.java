@@ -7,6 +7,8 @@ import org.springframework.beans.BeanUtils;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 参数可选值
@@ -40,6 +42,10 @@ public class ParameterValue implements Serializable {
         ParameterValueVo parameterValueVo = new ParameterValueVo();
         BeanUtils.copyProperties(this, parameterValueVo);
         return parameterValueVo;
+    }
+
+    public static List<ParameterValueVo> toList(List<ParameterValue> parameterValues) {
+        return parameterValues.stream().map(parameterValue -> {return parameterValue.toVo();}).collect(Collectors.toList());
     }
 
 }

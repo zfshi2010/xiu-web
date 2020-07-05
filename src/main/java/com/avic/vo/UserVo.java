@@ -1,5 +1,6 @@
 package com.avic.vo;
 
+import com.avic.enums.RoleType;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -25,6 +26,9 @@ public class UserVo implements Serializable {
 
     private String phone;
 
-    private String address;
+    private RoleType roleType;
 
+    private String roleTypeName;
+
+    private String createTime;
 }

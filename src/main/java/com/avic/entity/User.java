@@ -1,5 +1,7 @@
 package com.avic.entity;
 
+import com.avic.enums.ActionType;
+import com.avic.enums.RoleType;
 import com.avic.vo.UserVo;
 import lombok.Data;
 import org.springframework.beans.BeanUtils;
@@ -37,12 +39,16 @@ public class User implements Serializable {
     @Column(length = 11)
     private String phone;
 
-    @Column(length = 100)
-    private String address;
+    @Enumerated(EnumType.STRING)
+    private RoleType roleType;
+
+    @Column(length = 20)
+    private String createTime;
 
     public UserVo toVo() {
         UserVo userVo = new UserVo();
         BeanUtils.copyProperties(this,userVo);
+        userVo.setRoleTypeName(this.roleType.getName());
         return userVo;
     }
 

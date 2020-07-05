@@ -61,9 +61,22 @@
                                         <option value="">请选择</option>
                                     </select>
                                 </div>
+                                <div class="form_1" th:each="parameter,stat:${parameters}">
+                                    <label><span th:text="${parameter.name}">测量任务</span><em></em></label>
+                                    <select class="parameter" th:id="${'guestbookParameterValues[' + stat.index +'].parameterValueId'}" th:name="${'guestbookParameterValues[' + stat.index +'].parameterValueId'}">
+                                        <option value="">请选择</option>
+                                        <option th:each="parameterValue,stat2:${parameter.parameterValues}" th:value="${parameterValue.id}" th:text="${parameterValue.value}" th:attr="ifInput=${parameterValue.ifInput}"></option>
+                                    </select>
+                                    <div>
+                                        <input class="content" th:id="${'guestbookParameterValues[' + stat.index +'].content'}" th:name="${'guestbookParameterValues[' + stat.index +'].content'}" type="text" style="display: none"/>
+                                        <input class="ifInput" th:id="${'guestbookParameterValues[' + stat.index +'].ifInput'}" th:name="${'guestbookParameterValues[' + stat.index +'].ifInput'}" type="hidden" value="false"/>
+                                        <input th:id="${'guestbookParameterValues[' + stat.index +'].parameterId'}" th:name="${'guestbookParameterValues[' + stat.index +'].parameterId'}" type="hidden" th:value="${parameter.id}"/>
+                                        <input th:id="${'guestbookParameterValues[' + stat.index +'].parameterName'}" th:name="${'guestbookParameterValues[' + stat.index +'].parameterName'}" type="hidden" th:value="${parameter.name}"/>
+                                    </div>
+                                </div>
                                 <div class="form_1">
                                     <label>公司<em>(*必填）</em></label>
-                                    <input name="name" id="name" type="text"/>
+                                    <input name="companyName" id="companyName" type="text"/>
                                 </div>
                                 <div class="form_1">
                                     <label>姓名<em>(*必填）</em></label>
