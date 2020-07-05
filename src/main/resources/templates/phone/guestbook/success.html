@@ -22,10 +22,12 @@
                 <!-- use captain icon for toggle menu -->
                 <div id="hamburgermenu">
                     <ul>
-                        <li><a href="/phone.html">网站首页</a></li>
-                        <li><a href="/phone/serviceForType/indexForMenu.html">分类信息</a></li>
-                        <li><a href="/phone/serviceForType/index.html">品牌服务</a></li>
-                        <li><a href="/phone/aboutUs.html">关于我们</a></li>
+                        <li th:each="contactWay,stat:${contactWays}">
+                            <a th:href="${'tel:' + contactWay.phone}">
+                                <img src="/phone/images/phone.png" width="30" height="30" style="line-height:30px;"/>
+                                <span style="line-height:30px;" th:text="${contactWay.name}">联系张三</span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
                 <div class="overlay"></div>

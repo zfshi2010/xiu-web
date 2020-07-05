@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0"/>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title th:text="${'产品信息_' + produce.name}"></title>
+    <meta name="description" th:content="${produce.overview}"/>
+    <meta name="keywords" th:content="${produce.overview}"/>
+    <meta name="author" th:content="${produce.author}"/>
+    <link rel="stylesheet" type="text/css" href="/phone/css/ltkj.css"/>
+    <script th:src="@{/img/build/pdf.js}"></script>
+    <script th:src="@{/img/web/viewer.js}"></script>
+    <link rel="stylesheet" th:href="@{/img/web/viewer.css}"/>
+
+    <meta http-equiv="refresh" th:content="${'0.1;url=/img/web/viewer.html?file=mypdf/' + produce.pdfFile}"/>
+
+</head>
+<body>
+    <div layout:fragment="content">
+        <div id="pgcontainer">
+            <!--主题内容的开始-->
+            <div class="zymain">
+                <!--更换内容开始-->
+                <div class="zy_nr">
+                    <a class="media" th:href="${'/img/web/viewer.html?file=mypdf/' + produce.pdfFile}">哈哈</a>
+                </div>
+                <!--更换内容结束-->
+            </div>
+            <!--主题内容的结束-->
+        </div>
+    </div>
+</body>
+
+</html>

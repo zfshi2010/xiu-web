@@ -40,8 +40,26 @@ $(function(){
         ]
     });
 
+    var ueParam = UE.getEditor('editorParamContent',{toolbar: [
+            [
+                'source', '|', 'undo', 'redo', '|',
+                'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'removeformat',
+                'formatmatch', 'autotypeset', 'blockquote', 'pasteplain',
+                '|', 'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist','|',
+                'rowspacingtop', 'rowspacingbottom', 'lineheight', '|',
+                'customstyle', '|',
+                'directionalityltr', 'directionalityrtl', 'indent', '|',
+                'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|', 'touppercase', 'tolowercase', '|',
+                'link', 'unlink', 'anchor', '|', 'imagenone', 'imageleft', 'imageright', 'imagecenter', '|','simpleupload', 'insertimage','emotion', '|',
+                'horizontal', 'date', 'time', 'spechars', 'snapscreen', 'wordimage', '|',
+                'inserttable', 'deletetable'
+            ]
+        ]
+    });
+
     ue.addListener("ready", function () {
         ue.setContent($('#content').val());
+        ueParam.setContent($('#paramContent').val());
     });
     $('#add-message-form').validate({
         rules: {
@@ -57,6 +75,10 @@ $(function(){
     $('#add-message-button').click(function(){
         var content = ue.getContent();
         $('#content').val(content);
+
+        var ueParamContent = ueParam.getContent();
+        $('#paramContent').val(ueParamContent);
+
         if($('#add-message-form').valid()){
             $.ajax({
                 type: "POST",
@@ -80,11 +102,13 @@ $(function(){
     $('#img-img').click(function() {
         util.formChange($('#fileName'), $(this), $('#add-message-form'), $('#img'))
     })
-    $('#paramImg-img').click(function() {
-        util.formChange($('#fileName'), $(this), $('#add-message-form'), $('#paramImg'));
-    })
     $('#video-img').click(function() {
         util2.formChange($('#fileName'), $(this), $('#add-message-form'), $('#video'));
+    })
+
+    $('#pdfFile-button').click(function() {
+        utilPdf.formChange($('#fileName'), $(this), $('#add-message-form'), $('#pdfFile'));
+
     })
 });
 
@@ -129,6 +153,52 @@ var util = {
                 return alert('图片大小不能超过20MB')
             }
             util.fileupload($form, $imgLook, $val, $changeDom)
+        })
+        $changeDom.trigger('click')
+    }
+}
+
+var utilPdf = {
+    isupload: false,
+    fileupload: function (form, imgDom, input, $changeDom) {
+        form.attr('action', config.imgUrl + 'api/pdfUpload')
+        form.off('submit').on('submit', function () {
+            $(this).ajaxSubmit({
+                beforeSerialize: function () {
+                    utilPdf.isupload = true
+                },
+                success: function (data) {
+                    input.val(data.url)
+                    imgDom.attr('src', config.imgUrl + "img" + data.url)
+                    utilPdf.isupload = false
+                    $changeDom.val('')
+                    alert('上传成功')
+                },
+                error: function () {
+                    utilPdf.isupload = false
+                    alert('上传异常')
+                }
+            })
+            return false
+        })
+        form.trigger('submit')
+    },
+    formChange: function ($changeDom, $imgLook, $form, $val) {
+        $changeDom.off('change').on('change', function (e) {
+            e.preventDefault()
+            if (utilPdf.isupload) {
+                return alert('正在上传图片,请稍候')
+            }
+            if (!/\.(pdf)$/.test(e.target.value)) {
+                alert('仅支持pdf格式文件上传！')
+                $(this).val('')
+                return false;
+            }
+            if (e.target.files[0].size > 20480000) {
+                $(this).val('')
+                return alert('文件大小不能超过20MB')
+            }
+            utilPdf.fileupload($form, $imgLook, $val, $changeDom)
         })
         $changeDom.trigger('click')
     }

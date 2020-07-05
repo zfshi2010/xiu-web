@@ -14,6 +14,8 @@ public class ProductTypeVo implements Serializable {
 
     private Long productFieldId;
 
+    private String img;
+
     private String name;
 
     private String title;

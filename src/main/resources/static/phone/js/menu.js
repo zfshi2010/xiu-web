@@ -15,13 +15,21 @@ $(function(){
       jsAnimateMenu('open');
     }
   });
+
+  $('#imgDiv').on('click',function(e){
+      if($bdy.hasClass('openmenu')) {
+          jsAnimateMenu('close');
+      } else {
+          jsAnimateMenu('open');
+      }
+  });
   
   $('.overlay').on('click', function(e){
     if($bdy.hasClass('openmenu')) {
       jsAnimateMenu('close');
     }
   });
-  
+
   function jsAnimateMenu(tog) {
     if(tog == 'open') {
       $bdy.addClass('openmenu');

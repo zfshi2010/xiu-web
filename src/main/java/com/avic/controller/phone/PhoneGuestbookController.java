@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @Controller
 @RequestMapping("/phone/guestbook")
@@ -24,19 +25,24 @@ public class PhoneGuestbookController extends BaseController {
     private SysConfigRepository sysConfigRepository;
 
     @Autowired
-    private ProductFieldRepository serviceForTypeRepository;
-
-    @Autowired
-    private ServiceForBrandRepository serviceForBrandRepository;
-
-    @Autowired
     private ProductTypeService serviceForTypeMessageService;
+
+    @Autowired
+    private MeasurementTaskRepository measurementTaskRepository;
 
     @Autowired
     private BlogrollRepository blogrollRepository;
 
     @Autowired
     private BannerRepository bannerRepository;
+
+    @Autowired
+    private ContactWayRepository contactWayRepository;
+
+    private void setContactWay(ModelMap model) {
+        List<ContactWay> contactWays = contactWayRepository.findAll();
+        model.addAttribute("contactWays", contactWays);
+    }
 
     private String getFirstPage(ModelMap model) {
         SysConfig firstPage = sysConfigRepository.findByType(SysConfig.FIRST_PAGE);
@@ -48,39 +54,50 @@ public class PhoneGuestbookController extends BaseController {
     public String index(ModelMap model) throws Exception{
         SysConfig firstPage = sysConfigRepository.findByType(SysConfig.FIRST_PAGE);
         model.addAttribute("firstPage", firstPage);
+        setContactWay(model);
+
+        List<MeasurementTask> measurementTasks = measurementTaskRepository.findAll();
+        model.addAttribute("measurementTasks", measurementTasks);
         return "phone/guestbook/index";
     }
 
     @RequestMapping("/save")
     public String save(ModelMap model,Guestbook guestbook) throws Exception{
+
+        if (guestbook.getMeasurementTaskId() == null || guestbook.getMeasurementTaskId() == 0L) {
+            model.addAttribute("errorMessage", "请选择测量任务!");
+            return getFirstPage(model);
+        }
+        if (guestbook.getTextureId() == null || guestbook.getTextureId() == 0L) {
+            model.addAttribute("errorMessage", "请选择材质!");
+            return getFirstPage(model);
+        }
         if (StringUtils.isBlank(guestbook.getName())) {
-            model.addAttribute("errorMessage", "您的姓名不能为空!");
+            model.addAttribute("errorMessage", "姓名不能为空!");
             return getFirstPage(model);
         }
         if (StringUtils.isBlank(guestbook.getPhone())) {
-            model.addAttribute("errorMessage", "您的电话不能为空!");
+            model.addAttribute("errorMessage", "联系电话不能为空!");
             return getFirstPage(model);
         }
         if (guestbook.getName().length() > 10) {
-            model.addAttribute("errorMessage", "您的姓名过长!");
+            model.addAttribute("errorMessage", "姓名过长!");
             return getFirstPage(model);
         }
         if (guestbook.getPhone().length() > 15) {
-            model.addAttribute("errorMessage", "您的电话过长!");
+            model.addAttribute("errorMessage", "联系电话过长!");
             return getFirstPage(model);
         }
 
-        if (StringUtils.isNotBlank(guestbook.getAddress()) && guestbook.getAddress().length() > 100) {
-            model.addAttribute("errorMessage", "地址过长!");
-            return getFirstPage(model);
-        }
-        if (StringUtils.isNotBlank(guestbook.getContent()) && guestbook.getContent().length() > 200) {
-            model.addAttribute("errorMessage", "留言过长!");
+        if (StringUtils.isNotBlank(guestbook.getContent()) && guestbook.getContent().length() > 500) {
+            model.addAttribute("errorMessage", "内容过长!");
             return getFirstPage(model);
         }
 
         SysConfig firstPage = sysConfigRepository.findByType(SysConfig.FIRST_PAGE);
         model.addAttribute("firstPage", firstPage);
+
+        setContactWay(model);
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();

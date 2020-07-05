@@ -5,11 +5,13 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0"/>
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <title th:text="${'在线报修_' + firstPage.title}"></title>
+    <title th:text="${'在线选型_' + firstPage.title}"></title>
     <meta name="description" th:content="${firstPage.description}"/>
     <meta name="keywords" th:content="${firstPage.keywords}"/>
     <meta name="author" th:content="${firstPage.author}"/>
     <link rel="stylesheet" type="text/css" href="/phone/css/ltkj.css"/>
+    <script src="/phone/js/jquery-1.9.1.min.js"></script>
+    <script th:src="@{/phone/js/guestbook.js}"></script>
 </head>
 <body>
     <div layout:fragment="content">
@@ -17,15 +19,17 @@
             <!--头部的开始-->
             <header>
                 <a class="fanhui" href="#" onclick="javascript:history.back(-1);"></a>
-                <strong>在线报修</strong>
+                <strong>在线选型</strong>
                 <a href="#" class="menubtn"></a>
                 <!-- use captain icon for toggle menu -->
                 <div id="hamburgermenu">
                     <ul>
-                        <li><a href="/phone.html">网站首页</a></li>
-                        <li><a href="/phone/serviceForType/indexForMenu.html">分类信息</a></li>
-                        <li><a href="/phone/serviceForType/index.html">品牌服务</a></li>
-                        <li><a href="/phone/aboutUs.html">关于我们</a></li>
+                        <li th:each="contactWay,stat:${contactWays}">
+                            <a th:href="${'tel:' + contactWay.phone}">
+                                <img src="/phone/images/phone.png" width="30" height="30" style="line-height:30px;"/>
+                                <span style="line-height:30px;" th:text="${contactWay.name}">联系张三</span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
                 <div class="overlay"></div>
@@ -36,32 +40,42 @@
             <div class="zymain">
                 <!--更换内容开始-->
                 <div class="zy_nr">
-                    <h2>在线报修</h2>
+                    <h2>在线选型</h2>
                     <p>
                         <form class="form1" method="post" action="/phone/guestbook/save.html" name="myform" id="myform">
                             <div class="form_l f_l">
                                 <div class="form_1">
-                                    <label>您的姓名<em>(*必填）</em></label>
+                                    <label>测量任务<em></em></label>
+                                    <select id="measurementTaskId" name="measurementTaskId">
+                                        <option value="">请选择</option>
+                                        <option th:each="measurementTask,stat:${measurementTasks}" th:value="${measurementTask.id}" th:text="${measurementTask.name}"></option>
+                                    </select>
+                                </div>
+                                <div class="form_1">
+                                    <label>测量范围<em></em></label>
+                                    <input name="measurementRange" id="measurementRange" type="text"/>
+                                </div>
+                                <div class="form_1">
+                                    <label>材质<em></em></label>
+                                    <select id="textureId" name="textureId">
+                                        <option value="">请选择</option>
+                                    </select>
+                                </div>
+                                <div class="form_1">
+                                    <label>公司<em>(*必填）</em></label>
                                     <input name="name" id="name" type="text"/>
                                 </div>
                                 <div class="form_1">
-                                    <label>您的电话<em>(*必填）</em></label>
+                                    <label>姓名<em>(*必填）</em></label>
+                                    <input name="name" id="name" type="text"/>
+                                </div>
+                                <div class="form_1">
+                                    <label>联系电话<em>(*必填）</em></label>
                                     <input name="phone" id="phone" type="text"/>
                                 </div>
                                 <div class="form_1">
-                                    <label>地址</label>
-                                    <input name="address" id="address" type="text"/>
-                                </div>
-                                <div class="form_1">
-                                    <label>留言</label>
-                                    <input name="content" id="content" type="text"/>
-                                </div>
-                                <div class="form_1">
-                                    <label>报修内/外</label>
-                                    <select id="trade" name="trade">
-                                        <option value="1">报修内</option>
-                                        <option value="2">报修外</option>
-                                    </select>
+                                    <label>内容</label>
+                                    <textarea style="width: 100%;height: 80px;" name="content" id="content"/>
                                 </div>
                                 <p th:text="${errorMessage}" style="color: red;" />
                                 <input name="" type="submit" class="button" value="提交留言"/>

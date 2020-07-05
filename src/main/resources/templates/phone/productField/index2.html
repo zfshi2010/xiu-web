@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="phone/fragments/layout">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0"/>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title th:text="${'产品领域_' + firstPage.title}"></title>
+    <meta name="description" th:content="${firstPage.description}"/>
+    <meta name="keywords" th:content="${firstPage.keywords}"/>
+    <meta name="author" th:content="${firstPage.author}"/>
+    <link rel="stylesheet" type="text/css" href="/phone/css/ltkj.css"/>
+</head>
+<body>
+
+    <div layout:fragment="content">
+        <div id="pgcontainer">
+            <!--头部的开始-->
+            <header>
+                <a class="fanhui" href="#" onclick="javascript:history.back(-1);"></a>
+                <strong>产品领域</strong>
+                <a href="#" class="menubtn"></a>
+                <!-- use captain icon for toggle menu -->
+                <div id="hamburgermenu">
+                    <ul>
+                        <li th:each="contactWay,stat:${contactWays}">
+                            <a th:href="${'tel:' + contactWay.phone}">
+                                <img src="/phone/images/phone.png" width="30" height="30" style="line-height:30px;"/>
+                                <span style="line-height:30px;" th:text="${contactWay.name}">联系张三</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="overlay"></div>
+            </header>
+            <!--头部的结束-->
+
+            <!--新闻中心开始-->
+            <div class="fwxm">
+                <!--标题开始-->
+                <div class="lgywm_title">
+                    <div class="xian"></div>
+                    <div class="lwenzi"><p><strong>产品领域</strong><br />PRODUCT FIELD</p></div>
+                </div>
+                <!--标题结束-->
+                <div class="xwzx_nr">
+                    <ul>
+                        <li th:each="productField,stat:${productFields}">
+                            <a th:href="${'/phone/productType/index-' + productField.id + '.html'}"><div class="lzj">
+                                <img th:src="${productField.img}"  th:alt="${productField.title}"/></div>
+                                <h3 th:text="${productField.title}"></h3>
+                                <p th:text="${productField.description}"></p></a>
+                        </li>
+                        <div class="clear"></div>
+                    </ul>
+                </div>
+            </div>
+            <!--新闻中心结束-->
+        </div>
+    </div>
+</body>
+
+</html>

@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 /**
- * 留言板
+ * 在线选型
  */
 @Data
 @Entity
@@ -19,20 +19,23 @@ public class Guestbook implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private Long measurementTaskId;
+
+    private Long textureId;
+
+    @Column(length = 200)
+    private String measurementRange;
+
+    private String companyName;
+
     @Column(length = 20)
     private String name;
 
     @Column(length = 15)
     private String phone;
 
-    @Column(length = 100)
-    private String address;
-
-    @Column(length = 300)
+    @Column(length = 500)
     private String content;
-
-    @Column(length = 2)
-    private String trade;
 
     @Column(length = 20)
     private String createTime;
@@ -40,11 +43,6 @@ public class Guestbook implements Serializable {
     public GuestbookVo toVo() {
         GuestbookVo guestbookVo = new GuestbookVo();
         BeanUtils.copyProperties(this, guestbookVo);
-        if (trade.equals("1")) {
-            guestbookVo.setTradeName("报修内");
-        } else {
-            guestbookVo.setTradeName("报修外");
-        }
         return guestbookVo;
     }
 

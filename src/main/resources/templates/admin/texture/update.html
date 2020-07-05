@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html dir="ltr" xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="admin/fragments/layout">
+<head>
+    <title>材质修改</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="/admin/pagination/pagination.css" />
+    <script type="text/javascript" th:src="@{/scripts/validate/jquery.validate.min.js}"></script>
+    <script type="text/javascript" th:src="@{/scripts/validate/chinese.js}"></script>
+    <script type="text/javascript" th:src="@{/admin/jquery.form.js}"></script>
+    <script th:src="@{/admin/pagination/jquery.pagination.js}"></script>
+    <script th:src="@{/uedit/ueditor.config.js}" />
+    <script th:src="@{/uedit/ueditor.all.js}" />
+    <script th:src="@{/uedit/lang/zh-cn/zh-cn.js}" />
+    <script th:src="@{/admin/script/texture/update.js}"></script>
+</head>
+<body>
+
+<div layout:fragment="content">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-12 d-flex no-block align-items-center">
+                <h4 class="page-title" th:text="${measurementTask.name + '—材质修改'}"></h4>
+                <div class="ml-auto text-right">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">首页</a></li>
+                            <li class="breadcrumb-item"><a href="/admin/measurementTask/index.html">测量任务</a></li>
+                            <li class="breadcrumb-item active" aria-current="page"><a th:text="${measurementTask.name + '—材质修改'}"></a></li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Container fluid  -->
+    <!-- ============================================================== -->
+    <div class="container-fluid">
+        <!-- ============================================================== -->
+        <!-- Start Page Content -->
+        <!-- ============================================================== -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <form class="form-horizontal" id="add-message-form" action="/userInfos/updatePerson" method="post">
+                        <div class="card-body">
+                            <h4 class="card-title" th:text="${'修改' + measurementTask.name + '材质'}"></h4>
+                            <div class="form-group row">
+                                <label for="name" class="col-sm-3 text-right control-label col-form-label"><span style="color: red">*</span>材质名称</label>
+                                <div class="col-sm-9">
+                                    <input type="hidden" id="measurementTaskId" name="measurementTaskId" th:value="${measurementTaskId}"/>
+                                    <input type="hidden" id="id" name="id" th:value="${texture.id}"/>
+                                    <input type="hidden" id="createTime" name="createTime" th:value="${texture.createTime}"/>
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="name Here" th:value="${texture.name}"/>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="author" class="col-sm-3 text-right control-label col-form-label"><span style="color: red">*</span>作者</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="author" name="author" placeholder="作者" th:value="${texture.author}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border-top">
+                            <div class="card-body">
+                                <button type="button" class="btn btn-primary" id="add-message-button">修改</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

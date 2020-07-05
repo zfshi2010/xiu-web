@@ -37,7 +37,7 @@ var getOpt = function(data){
 //分页开始
 var currentPageData = null ;
 var pageaction = function(){
-    $.get('/api/guestbook/index?t='+new Date().getTime(),{size:10,phone:$("#phone").val()},function(data){
+    $.get('/api/guestbook/index?t='+new Date().getTime(),{size:10,companyName:$('#companyName').val(),name:$('#name').val(),phone:$("#phone").val()},function(data){
         currentPageData = data.data.content;
         $(".pagination").pagination(data.data.totalElements, getOpt(data));
     });
@@ -49,7 +49,7 @@ var pageselectCallback = function(page_index, jq, size){
         fillData(currentPageData);
         currentPageData = null;
     }else {
-        $.get('/api/guestbook/index?t='+new Date().getTime(),{size:size,page:page_index, phone:$("#phone").val()
+        $.get('/api/guestbook/index?t='+new Date().getTime(),{size:size,page:page_index, companyName:$('#companyName').val(),name:$('#name').val(),phone:$("#phone").val()
         },function(data){
             fillData(data.data.content);
         });
@@ -61,9 +61,9 @@ function fillData(data){
     $.each(data,function(k,v){
         var html = "" ;
         html += `<tr>
+            <td>${v.companyName}</td>
             <td>${v.name}</td>
             <td>${v.phone}</td>
-            <td>${v.address}</td>
             <td>${v.createTime}</td>
             <td>
                 <a class="btn btn-info btn-sm" href="/admin/guestbook/detail.html?id=${v.id}">查看详情</a>

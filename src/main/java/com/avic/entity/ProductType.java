@@ -25,6 +25,9 @@ public class ProductType implements Serializable {
     private String name;
 
     @Column(length = 100)
+    private String img;
+
+    @Column(length = 100)
     private String title;
 
     /**

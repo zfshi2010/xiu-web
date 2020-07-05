@@ -2,7 +2,7 @@
 <html dir="ltr" xmlns:th="http://www.thymeleaf.org"
       layout:decorator="admin/fragments/layout">
 <head>
-    <title>在线报修</title>
+    <title>在线选型</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="/admin/pagination/pagination.css" />
     <script th:src="@{/admin/pagination/jquery.pagination.js}"></script>
@@ -17,12 +17,12 @@
     <div class="page-breadcrumb">
         <div class="row">
             <div class="col-12 d-flex no-block align-items-center">
-                <h4 class="page-title">在线报修</h4>
+                <h4 class="page-title">在线选型</h4>
                 <div class="ml-auto text-right">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="#">首页</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">在线报修</li>
+                            <li class="breadcrumb-item active" aria-current="page">在线选型</li>
                         </ol>
                     </nav>
                 </div>
@@ -46,8 +46,14 @@
                         <div class="panel">
                             <div class="panel-body">
                                 <form class="form-inline">
-                                    <div class="form-group col-md-3">
-                                        <input type="text" class="form-control" id="title" name="title" placeholder="电话"/>
+                                    <div class="form-group col-md-2">
+                                        <input type="text" class="form-control" id="companyName" name="companyName" placeholder="公司名称"/>
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <input type="text" class="form-control" id="name" name="name" placeholder="姓名"/>
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <input type="text" class="form-control" id="phone" name="phone" placeholder="联系电话"/>
                                     </div>
                                     <div class="form-group col-md-3">
                                         <button type="button" class="btn btn-primary" id="searchBtn">查询</button>
@@ -63,10 +69,10 @@
                             <table id="zero_config" class="table table-striped table-bordered">
                                 <thead>
                                 <tr>
-                                    <th>联系人</th>
+                                    <th>公司名称</th>
+                                    <th>姓名</th>
                                     <th>电话</th>
-                                    <th>地址</th>
-                                    <th>留言时间</th>
+                                    <th>提交时间</th>
                                     <th>操作</th>
                                 </tr>
                                 </thead>

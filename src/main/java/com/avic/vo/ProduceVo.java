@@ -20,7 +20,7 @@ public class ProduceVo implements Serializable {
 
     private String img;
 
-    private String paramImg;
+    private String paramContent;
 
     /**
      * 概述
@@ -30,6 +30,8 @@ public class ProduceVo implements Serializable {
     private String content;
 
     private String video;
+
+    private String pdfFile;
 
     private String author;
 

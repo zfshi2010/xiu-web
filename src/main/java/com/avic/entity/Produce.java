@@ -29,8 +29,8 @@ public class Produce implements Serializable {
     @Column(length = 100)
     private String img;
 
-    @Column(length = 100)
-    private String paramImg;
+    @Column(length = 10000)
+    private String paramContent;
 
     /**
      * 概述
@@ -43,6 +43,9 @@ public class Produce implements Serializable {
 
     @Column(length = 100)
     private String video;
+
+    @Column(length = 100)
+    private String pdfFile;
 
     @Column(length = 11)
     private String author;
