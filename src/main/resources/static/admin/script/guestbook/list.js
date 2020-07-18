@@ -67,6 +67,7 @@ function fillData(data){
             <td>${v.createTime}</td>
             <td>
                 <a class="btn btn-info btn-sm" href="/admin/guestbook/detail.html?id=${v.id}">查看详情</a>
+                <a class="btn btn-info btn-sm" href="/admin/guestbook/pdf.html?id=${v.id}">导出为PDF</a>
                 <a class="btn btn-info btn-sm" href="javascript:void(0)" onclick="del('${v.id}')">删除</a>
 			</td>
        </tr>` ;

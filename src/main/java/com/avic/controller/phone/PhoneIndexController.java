@@ -41,6 +41,11 @@ public class PhoneIndexController extends BaseController {
         return getFirstPage(model);
     }
 
+    @RequestMapping("/index")
+    public String index(ModelMap model) throws Exception{
+        return getFirstPage(model);
+    }
+
     @RequestMapping("/phone")
     public String firstPage(ModelMap model) throws Exception{
         return getFirstPage(model);
@@ -61,7 +66,7 @@ public class PhoneIndexController extends BaseController {
     }
 
     @RequestMapping("/phone/index")
-    public String index(ModelMap model) throws Exception{
+    public String phoneIndex(ModelMap model) throws Exception{
         return getFirstPage(model);
     }
 }

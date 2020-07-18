@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 public interface ProductTypeRepository extends JpaRepository<ProductType, Long>,JpaSpecificationExecutor {
 
-    List<ProductType> findByProductFieldId(Long productFieldId);
+    List<ProductType> findByProductBrandId(Long productBrandId);
 }

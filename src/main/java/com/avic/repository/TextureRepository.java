@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface TextureRepository extends JpaRepository<Texture, Long>,JpaSpecificationExecutor {
 
-    List<Texture> findByMeasurementTaskId(Long measurementTaskId);
+    List<Texture> findByMeasurementTaskTypeId(Long measurementTaskTypeId);
 
 }

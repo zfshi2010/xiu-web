@@ -19,7 +19,7 @@ public class ProductType implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long productFieldId;
+    private Long productBrandId;
 
     @Column(length = 300)
     private String name;

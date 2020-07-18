@@ -69,7 +69,7 @@ function fillData(data){
             <td>
 				<a class="btn btn-info btn-sm" href="/admin/productField/update.html?id=${v.id}">修改</a>
 				<a class="btn btn-info btn-sm" href="javascript:void(0)" onclick="del('${v.id}')">删除</a>
-				<a class="btn btn-info btn-sm" href="/admin/productType/index.html?productFieldId=${v.id}">产品类型管理</a>
+				<a class="btn btn-info btn-sm" href="/admin/productBrand/index.html?productFieldId=${v.id}">产品品牌管理</a>
 			</td>
        </tr>` ;
         $list.append($(html));

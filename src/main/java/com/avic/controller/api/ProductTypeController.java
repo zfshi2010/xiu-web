@@ -61,23 +61,23 @@ public class ProductTypeController {
         return JsonResult.getSuccessResult();
     }
 
-    @GetMapping("/listByProductFieldId")
+    @GetMapping("/listByProductBrandId")
     @UserLoginToken
-    public JsonResult listByProductFieldId(Long productFieldId) {
-        List<ProductType> productTypes = productTypeRepository.findByProductFieldId(productFieldId);
+    public JsonResult listByProductFieldId(Long productBrandId) {
+        List<ProductType> productTypes = productTypeRepository.findByProductBrandId(productBrandId);
         return JsonResult.getSuccessResult(productTypes);
     }
 
     @GetMapping("/index")
     @UserLoginToken
-    public JsonResult index(Integer page, Integer size, Long productFieldId) {
+    public JsonResult index(Integer page, Integer size, Long productBrandId) {
         if (null == page) {
             page = 0;
         }
         if (null == size) {
             size = 10;
         }
-        Specification<ProductType> specification = getMenuSpecification(productFieldId);
+        Specification<ProductType> specification = getSpecification(productBrandId);
 
         PageRequest pageRequest = new PageRequest(page, size, Sort.Direction.DESC, "id");
 
@@ -89,11 +89,11 @@ public class ProductTypeController {
      * 带条件的分页查询
      * @return Specification
      */
-    private Specification<ProductType> getMenuSpecification(Long productFieldId) {
+    private Specification<ProductType> getSpecification(Long productBrandId) {
         return (Specification<ProductType>) (root, criteriaQuery, criteriaBuilder) -> {
             Predicate predicate = criteriaBuilder.conjunction();
-            if (productFieldId != null && productFieldId != 0L) {
-                predicate.getExpressions().add(criteriaBuilder.equal(root.get("productFieldId"), productFieldId));
+            if (productBrandId != null && productBrandId != 0L) {
+                predicate.getExpressions().add(criteriaBuilder.equal(root.get("productBrandId"), productBrandId));
             }
             return predicate;
         };

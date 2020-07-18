@@ -14,7 +14,7 @@ public class TextureVo implements Serializable {
 
     private Long id;
 
-    private Long measurementTaskId;
+    private Long measurementTaskTypeId;
 
     private String name;
 

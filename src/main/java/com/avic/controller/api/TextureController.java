@@ -54,23 +54,23 @@ public class TextureController {
         return JsonResult.getSuccessResult();
     }
 
-    @GetMapping("/listByMeasurementTaskId")
+    @GetMapping("/listByMeasurementTaskTypeId")
     @UserLoginToken
-    public JsonResult listByMeasurementTaskId(Long measurementTaskId) {
-        List<Texture> textures = textureRepository.findByMeasurementTaskId(measurementTaskId);
+    public JsonResult listByMeasurementTaskTypeId(Long measurementTaskTypeId) {
+        List<Texture> textures = textureRepository.findByMeasurementTaskTypeId(measurementTaskTypeId);
         return JsonResult.getSuccessResult(textures);
     }
 
     @GetMapping("/index")
     @UserLoginToken
-    public JsonResult index(Integer page, Integer size, Long measurementTaskId) {
+    public JsonResult index(Integer page, Integer size, Long measurementTaskTypeId) {
         if (null == page) {
             page = 0;
         }
         if (null == size) {
             size = 10;
         }
-        Specification<Texture> specification = getSpecification(measurementTaskId);
+        Specification<Texture> specification = getSpecification(measurementTaskTypeId);
 
         PageRequest pageRequest = new PageRequest(page, size, Sort.Direction.DESC, "id");
 
@@ -82,11 +82,11 @@ public class TextureController {
      * 带条件的分页查询
      * @return Specification
      */
-    private Specification<Texture> getSpecification(Long measurementTaskId) {
+    private Specification<Texture> getSpecification(Long measurementTaskTypeId) {
         return (Specification<Texture>) (root, criteriaQuery, criteriaBuilder) -> {
             Predicate predicate = criteriaBuilder.conjunction();
-            if (measurementTaskId != null && measurementTaskId != 0L) {
-                predicate.getExpressions().add(criteriaBuilder.equal(root.get("measurementTaskId"), measurementTaskId));
+            if (measurementTaskTypeId != null && measurementTaskTypeId != 0L) {
+                predicate.getExpressions().add(criteriaBuilder.equal(root.get("measurementTaskTypeId"), measurementTaskTypeId));
             }
             return predicate;
         };

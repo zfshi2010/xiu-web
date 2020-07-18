@@ -12,6 +12,8 @@ public class ProductFieldVo implements Serializable {
 
     private Long id;
 
+    private Long productBrandId;
+
     private String name;
 
     private String title;

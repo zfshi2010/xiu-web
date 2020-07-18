@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 /**
- * 差评信息
+ * 产品信息
  */
 @Data
 @Entity
@@ -21,6 +21,8 @@ public class Produce implements Serializable {
 
     private Long productFieldId;
 
+    private Long productBrandId;
+
     private Long productTypeId;
 
     @Column(length = 100)
@@ -31,6 +33,9 @@ public class Produce implements Serializable {
 
     @Column(length = 10000)
     private String paramContent;
+
+    @Column(length = 100)
+    private String tags;
 
     /**
      * 概述

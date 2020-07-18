@@ -62,6 +62,16 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label for="productTypeId" class="col-sm-3 text-right control-label col-form-label"><span style="color: red">*</span>产品品牌</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" id="productBrandId" name="productBrandId">
+                                        <option value="">请选择所属品牌</option>
+                                        <option th:each="productBrand,stat:${productBrands}" th:value="${productBrand.id}" th:text="${productBrand.name}" th:selected="${productBrand.id==produce.productBrandId}">
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label for="productTypeId" class="col-sm-3 text-right control-label col-form-label"><span style="color: red">*</span>产品类型</label>
                                 <div class="col-sm-9">
                                     <select class="form-control" id="productTypeId" name="productTypeId">
@@ -85,6 +95,12 @@ s                            <div class="form-group row">
                                     <input type="hidden" id="id" name="id" th:value="${produce.id}"/>
                                     <input type="hidden" id="createTime" name="createTime" th:value="${produce.createTime}"/>
                                     <input type="text" class="form-control" id="name" name="name" placeholder="name Here" th:value="${produce.name}"/>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="name" class="col-sm-3 text-right control-label col-form-label">Tags（多个以,号隔开）</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="tags" name="tags" placeholder="tags Here" th:value="${produce.tags}"/>
                                 </div>
                             </div>
                             <div class="form-group row">

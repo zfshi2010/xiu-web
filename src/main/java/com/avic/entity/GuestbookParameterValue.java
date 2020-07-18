@@ -6,6 +6,8 @@ import org.springframework.beans.BeanUtils;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 在线选型其他属性
@@ -50,6 +52,12 @@ public class GuestbookParameterValue implements Serializable {
         GuestbookParameterValueVo guestbookParameterValueVo = new GuestbookParameterValueVo();
         BeanUtils.copyProperties(this, guestbookParameterValueVo);
         return guestbookParameterValueVo;
+    }
+
+
+    public static List<GuestbookParameterValueVo> toList(List<GuestbookParameterValue> guestbookParameterValues) {
+        return guestbookParameterValues.stream().map(guestbookParameterValue ->
+        {return guestbookParameterValue.toVo();}).collect(Collectors.toList());
     }
 
 }

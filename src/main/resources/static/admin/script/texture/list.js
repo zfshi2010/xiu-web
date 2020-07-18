@@ -37,7 +37,7 @@ var getOpt = function(data){
 //分页开始
 var currentPageData = null ;
 var pageaction = function(){
-    $.get('/api/texture/index?t='+new Date().getTime(),{size:10,measurementTaskId:$("#measurementTaskId").val(),name:$('#name').val()},function(data){
+    $.get('/api/texture/index?t='+new Date().getTime(),{size:10,measurementTaskTypeId:$("#measurementTaskTypeId").val(),name:$('#name').val()},function(data){
         currentPageData = data.data.content;
         $(".pagination").pagination(data.data.totalElements, getOpt(data));
     });
@@ -49,7 +49,7 @@ var pageselectCallback = function(page_index, jq, size){
         fillData(currentPageData);
         currentPageData = null;
     }else {
-        $.get('/api/texture/index?t='+new Date().getTime(),{size:size,page:page_index, measurementTaskId:$("#measurementTaskId").val(),name:$('#name').val()
+        $.get('/api/texture/index?t='+new Date().getTime(),{size:size,page:page_index, measurementTaskTypeId:$("#measurementTaskTypeId").val(),name:$('#name').val()
         },function(data){
             fillData(data.data.content);
         });
@@ -87,7 +87,7 @@ function del(id){
         success: function(data) {
             if (data.status == 'success') {
                 alert("删除成功");
-                window.self.location = '/admin/texture/index.html?measurementTaskId=' + $('#measurementTaskId').val();
+                window.self.location = '/admin/texture/index.html?measurementTaskTypeId=' + $('#measurementTaskTypeId').val();
             } else {
                 alert(data.message);
             }

@@ -16,7 +16,7 @@ $(function(){
                 success: function (data) {
                     if (data.status == 'success') {
                         alert("保存成功");
-                        window.self.location = '/admin/texture/index.html?measurementTaskId=' + $('#measurementTaskId').val();
+                        window.self.location = '/admin/texture/index.html?measurementTaskTypeId=' + $('#measurementTaskTypeId').val();
                     } else {
                         alert(data.message);
                     }

@@ -18,6 +18,7 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
 				.addPathPatterns("/admin/**")
 				.addPathPatterns("/api/**")
 				.excludePathPatterns("/admin/login.html")
-				.excludePathPatterns("/admin/dWF2X2xvZ2lu");
+				.excludePathPatterns("/admin/dWF2X2xvZ2lu")
+				.excludePathPatterns("/api/produceComment/save");
 	}
 }

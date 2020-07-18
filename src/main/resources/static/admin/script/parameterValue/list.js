@@ -59,9 +59,14 @@ var pageselectCallback = function(page_index, jq, size){
 function fillData(data){
     var $list = $('#tbodyContent').empty();
     $.each(data,function(k,v){
+        var ifInputObj = '否';
+        if (v.ifInput) {
+            ifInputObj = '是';
+        }
         var html = "" ;
         html += `<tr>
             <td>${v.value}</td>
+            <td>${ifInputObj}</td>
             <td>${v.author}</td>
             <td>${v.createTime}</td>
             <td>

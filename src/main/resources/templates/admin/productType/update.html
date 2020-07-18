@@ -23,13 +23,14 @@
     <div class="page-breadcrumb">
         <div class="row">
             <div class="col-12 d-flex no-block align-items-center">
-                <h4 class="page-title" th:text="${productField.name + '—产品类型修改'}"></h4>
+                <h4 class="page-title" th:text="${productBrand.name + '—产品类型修改'}"></h4>
                 <div class="ml-auto text-right">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="#">首页</a></li>
                             <li class="breadcrumb-item"><a href="/admin/productField/index.html">产品领域</a></li>
-                            <li class="breadcrumb-item active" aria-current="page"><a th:text="${productField.name + '—产品类型修改'}"></a></li>
+                            <li class="breadcrumb-item"><a th:href="${'/admin/productBrand/index.html?productFieldId=' + productBrand.productFieldId}">产品品牌</a></li>
+                            <li class="breadcrumb-item active" aria-current="page"><a th:text="${productBrand.name + '—产品类型修改'}"></a></li>
                         </ol>
                     </nav>
                 </div>
@@ -51,7 +52,7 @@
                 <div class="card">
                     <form class="form-horizontal" id="add-message-form" action="/userInfos/updatePerson" method="post">
                         <div class="card-body">
-                            <h4 class="card-title" th:text="${'修改' + productField.name + '产品类型'}"></h4>
+                            <h4 class="card-title" th:text="${'修改' + productBrand.name + '产品类型'}"></h4>
                             <div class="form-group row">
                                 <label for="img" class="col-sm-3 text-right control-label col-form-label"><span style="color: red">*</span>示意图</label>
                                 <div class="col-sm-8">
@@ -69,7 +70,7 @@
                             <div class="form-group row">
                                 <label for="title" class="col-sm-3 text-right control-label col-form-label"><span style="color: red">*</span>标题</label>
                                 <div class="col-sm-9">
-                                    <input type="hidden" id="productFieldId" name="productFieldId" th:value="${productFieldId}"/>
+                                    <input type="hidden" id="productBrandId" name="productBrandId" th:value="${productBrandId}"/>
                                     <input type="hidden" id="id" name="id" th:value="${productType.id}"/>
                                     <input type="hidden" id="createTime" name="createTime" th:value="${productType.createTime}"/>
                                     <input type="text" class="form-control" id="title" name="title" placeholder="title Here" th:value="${productType.title}"/>

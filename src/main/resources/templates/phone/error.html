@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="phone/fragments/layout">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0"/>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title >系统异常</title>
+    <meta name="description" content="系统异常"/>
+    <meta name="keywords" content="系统异常"/>
+    <meta name="author" content="系统异常"/>
+    <link rel="stylesheet" type="text/css" href="/phone/css/ltkj.css"/>
+    <style type="text/css">
+        .newstitle {
+            font-weight: bold;
+            text-align: center;
+            margin-top: 10px;
+        }
+        .newstime {
+            text-align: center;
+            color: #aaaaaa;
+        }
+    </style>
+
+
+</head>
+<body>
+    <div layout:fragment="content">
+        <div id="pgcontainer">
+            <!--头部的开始-->
+            <header>
+                <a class="fanhui" href="#" onclick="javascript:history.back(-1);"></a>
+                <strong>系统异常</strong>
+                <a href="#" class="menubtn"></a>
+                <!-- use captain icon for toggle menu -->
+                <div id="hamburgermenu">
+                    <ul>
+                        <li th:each="contactWay,stat:${contactWays}">
+                            <a th:href="${'tel:' + contactWay.phone}">
+                                <img src="/phone/images/phone.png" width="30" height="30" style="line-height:30px;"/>
+                                <span style="line-height:30px;" th:text="${contactWay.name}">联系张三</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="overlay"></div>
+            </header>
+            <!--头部的结束-->
+
+            <!--主题内容的开始-->
+            <div class="zymain">
+                <!--更换内容开始-->
+                <div class="zy_nr">
+                    <h2>系统异常</h2>
+                    <div style="text-align: center">
+                        <p >
+                            系统异常,请稍后重试！
+                        </p>
+                    </div>
+                </div>
+                <!--更换内容结束-->
+            </div>
+            <!--主题内容的结束-->
+        </div>
+    </div>
+</body>
+
+</html>

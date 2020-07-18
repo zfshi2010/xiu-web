@@ -14,6 +14,8 @@ public class ProduceVo implements Serializable {
 
     private Long productFieldId;
 
+    private Long productBrandId;
+
     private Long productTypeId;
 
     private String name;
@@ -21,6 +23,8 @@ public class ProduceVo implements Serializable {
     private String img;
 
     private String paramContent;
+
+    private String tags;
 
     /**
      * 概述

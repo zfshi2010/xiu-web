@@ -1,7 +1,25 @@
 $(function () {
 
     $('#productFieldId').change(function () {
-        $.get('/api/productType/listByProductFieldId?productFieldId='+$(this).val(),function (data) {
+        $.get('/api/productBrand/listByProductFieldId?productFieldId='+$(this).val(),function (data) {
+            if (data.status=='success') {
+                $('#productBrandId').find('option').remove();
+                var produceBrandOption = `<option value="">请选择所属品牌</option>`;
+                $('#productBrandId').append($(produceBrandOption));
+
+                $('#productTypeId').find('option').remove();
+                var produceTypeOption = `<option value="">请选择所属类型</option>`;
+                $('#productTypeId').append($(produceTypeOption));
+                $.each(data.data,function (i,item) {
+                    produceBrandOption = `<option value="${item.id}">${item.name}</option>`;
+                    $('#productBrandId').append($(produceBrandOption));
+                })
+            }
+        });
+    });
+
+    $('#productBrandId').change(function () {
+        $.get('/api/productType/listByProductBrandId?productBrandId='+$(this).val(),function (data) {
             if (data.status=='success') {
                 $('#productTypeId').find('option').remove();
                 var produceTypeOption = `<option value="">请选择所属类型</option>`;
@@ -83,6 +101,7 @@ function fillData(data){
             <td>
 				<a class="btn btn-info btn-sm" href="/admin/produce/update.html?id=${v.id}">修改</a>
 				<a class="btn btn-info btn-sm" href="javascript:void(0)" onclick="del('${v.id}')">删除</a>
+				<a class="btn btn-info btn-sm" href="/admin/produceComment/index.html?produceId=${v.id}">评论信息</a>
 			</td>
        </tr>` ;
         $list.append($(html));

@@ -1,14 +1,8 @@
 package com.avic.controller.phone;
 
 import com.avic.controller.BaseController;
-import com.avic.entity.ContactWay;
-import com.avic.entity.Produce;
-import com.avic.entity.ProductField;
-import com.avic.entity.ProductType;
-import com.avic.repository.ContactWayRepository;
-import com.avic.repository.ProduceRepository;
-import com.avic.repository.ProductFieldRepository;
-import com.avic.repository.ProductTypeRepository;
+import com.avic.entity.*;
+import com.avic.repository.*;
 import com.avic.vo.ProduceVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +18,9 @@ public class PhoneProduceController extends BaseController {
 
     @Autowired
     private ProduceRepository produceRepository;
+
+    @Autowired
+    private ProduceCommentRepository produceCommentRepository;
 
     @Autowired
     private ProductFieldRepository productFieldRepository;
@@ -69,6 +66,8 @@ public class PhoneProduceController extends BaseController {
         ProductField productField = productFieldRepository.findOne(produceVo.getProductFieldId());
         model.addAttribute("productField", productField);
 
+        List<ProduceComment> produceComments = produceCommentRepository.findByProduceId(id);
+        model.addAttribute("produceComments", produceComments);
         setContactWay(model);
         return "phone/produce/detail";
     }

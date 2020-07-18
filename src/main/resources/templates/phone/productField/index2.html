@@ -46,7 +46,7 @@
                 <div class="xwzx_nr">
                     <ul>
                         <li th:each="productField,stat:${productFields}">
-                            <a th:href="${'/phone/productType/index-' + productField.id + '.html'}"><div class="lzj">
+                            <a th:href="${'/phone/productBrand/index-' + productField.id + '.html'}"><div class="lzj">
                                 <img th:src="${productField.img}"  th:alt="${productField.title}"/></div>
                                 <h3 th:text="${productField.title}"></h3>
                                 <p th:text="${productField.description}"></p></a>

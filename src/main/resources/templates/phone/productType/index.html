@@ -5,10 +5,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0"/>
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <title th:text="${'产品类型_' + productField.title}"></title>
-    <meta name="description" th:content="${productField.description}"/>
-    <meta name="keywords" th:content="${productField.keywords}"/>
-    <meta name="author" th:content="${productField.author}"/>
+    <title th:text="${'产品类型_' + productBrand.title}"></title>
+    <meta name="description" th:content="${productBrand.description}"/>
+    <meta name="keywords" th:content="${productBrand.keywords}"/>
+    <meta name="author" th:content="${productBrand.author}"/>
     <link rel="stylesheet" type="text/css" href="/phone/css/ltkj.css"/>
 </head>
 <body>
@@ -18,7 +18,7 @@
             <!--头部的开始-->
             <header>
                 <a class="fanhui" href="#" onclick="javascript:history.back(-1);"></a>
-                <strong th:text="${productField.name + '产品类型'}"></strong>
+                <strong th:text="${productBrand.name + '产品类型'}"></strong>
                 <a href="#" class="menubtn"></a>
                 <!-- use captain icon for toggle menu -->
                 <div id="hamburgermenu">

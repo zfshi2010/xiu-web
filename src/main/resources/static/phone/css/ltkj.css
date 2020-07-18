@@ -99,7 +99,7 @@ a.fanhui { width:20px; height:55px; float:left; margin-left:10px; background:url
 .zybt strong { font-size:15px; color:#333; line-height:40px; padding-left:10px;}
 .zy_nr { width:auto; padding:0px 10px; height:auto; margin:10px 0px;}
 .zy_nr h2 { font-size:16px; color: #333; text-align:center; line-height:50px; font-weight:700;}
-.zy_nr  p { font-size:12px; color:#666; line-height:24px; padding:5px 0px;}
+.zy_nr  p { font-size:12px; color:#666; line-height:14px; padding:2px 0px;}
 
 /*龙拓观点*/
 .ltgd_nr { width:98%; height:auto; margin:5px auto; padding:10px 0px;}
@@ -131,6 +131,26 @@ form { display: block; overflow: hidden; margin-top: 20px; margin-bottom: 20px }
 .form_2 textarea { width: 546px; height: 356px; border: 1px solid #cccccc; margin-top: 10px; outline: none; color: #666; padding-left: 10px; font-family: "微软雅黑"; }
 .button { width: 200px; height: 42px; line-height: 42px; border-radius: 20px; background-color: #1563ba; color: #fff; margin: 0 auto; display: block; margin-top: 20px; outline: none; cursor: pointer }
 
+.round2 {
+    position: relative;
+    border: 1px solid #e2e2e2;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    background: #fff;
+    margin: 10px 10px 0 10px;
+}
+.rTit {
+    height: 33px;
+    line-height: 33px;
+    background: repeat-x;
+}
+.text {
+    padding: 12px 15px;
+    color: #5a5a5a;
+    line-height: 22px;
+    font-size: 16px;
+}
 
 
 

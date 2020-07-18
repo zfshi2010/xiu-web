@@ -16,7 +16,7 @@ $(function(){
                 success: function (data) {
                     if (data.status == 'success') {
                         alert("保存成功");
-                        window.self.location = '/admin/productType/index.html?productFieldId=' + $('#productFieldId').val();
+                        window.self.location = '/admin/productType/index.html?productBrandId=' + $('#productBrandId').val();
                     } else {
                         alert(data.message);
                     }
@@ -36,15 +36,15 @@ $(function(){
 var util = {
     isupload: false,
     fileupload: function (form, imgDom, input, $changeDom) {
-        form.attr('action', config.imgUrl + 'api/imageUpload')
+        form.attr('action', '/api/imageUpload')
         form.off('submit').on('submit', function () {
             $(this).ajaxSubmit({
                 beforeSerialize: function () {
                     util.isupload = true
                 },
                 success: function (data) {
-                    input.val(config.imgUrl + "img" + data.url)
-                    imgDom.attr('src', config.imgUrl + "img" + data.url)
+                    input.val("/img" + data.url)
+                    imgDom.attr('src', "/img" + data.url)
                     util.isupload = false
                     $changeDom.val('')
                     alert('上传成功')

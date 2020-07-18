@@ -2,9 +2,9 @@ spring:
   #通用的数据源配置
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/subaozi?useSSL=false&useUnicode=true&characterEncoding=utf8
+    url: jdbc:mysql://127.0.0.1:3306/avic?useSSL=false&useUnicode=true&characterEncoding=utf8
     username: root
-    password: 1qazxsw2
+    password: EWI6kAFQrWSbhiEd
     type: com.alibaba.druid.pool.DruidDataSource
     filters: stat
     maxActive: 20
@@ -25,6 +25,6 @@ spring:
     hibernate:
       ddl-auto: update
   resources:
-    static-locations: classpath:static/,file:/data/programs/img
+    static-locations: classpath:static/,file:/data/weixin/img
 img:
-  path: /data/programs/img
+  path: /data/weixin/img

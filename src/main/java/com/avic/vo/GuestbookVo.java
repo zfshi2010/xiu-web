@@ -17,6 +17,10 @@ public class GuestbookVo implements Serializable {
 
     private Long measurementTaskId;
 
+    private Long measurementTaskTypeId;
+
+    private String measurementTaskTypeName;
+
     private String measurementTaskName;
 
     private Long textureId;

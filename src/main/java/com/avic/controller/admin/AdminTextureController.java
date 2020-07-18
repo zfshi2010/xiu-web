@@ -4,10 +4,7 @@ import com.avic.controller.BaseController;
 import com.avic.entity.MeasurementTask;
 import com.avic.entity.ParameterValue;
 import com.avic.entity.Texture;
-import com.avic.repository.MeasurementTaskRepository;
-import com.avic.repository.ParameterRepository;
-import com.avic.repository.ParameterValueRepository;
-import com.avic.repository.TextureRepository;
+import com.avic.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -21,19 +18,19 @@ public class AdminTextureController extends BaseController {
     private TextureRepository textureRepository;
 
     @Autowired
-    private MeasurementTaskRepository measurementTaskRepository;
+    private MeasurementTaskTypeRepository measurementTaskTypeRepository;
 
     @RequestMapping("/index")
-    public String index(ModelMap model, Long measurementTaskId) throws Exception{
-        model.addAttribute("measurementTaskId", measurementTaskId);
-        model.addAttribute("measurementTask", measurementTaskRepository.findOne(measurementTaskId));
+    public String index(ModelMap model, Long measurementTaskTypeId) throws Exception{
+        model.addAttribute("measurementTaskTypeId", measurementTaskTypeId);
+        model.addAttribute("measurementTaskType", measurementTaskTypeRepository.findOne(measurementTaskTypeId));
         return "admin/texture/list";
     }
 
     @RequestMapping("/add")
-    public String add(ModelMap model, Long measurementTaskId) throws Exception{
-        model.addAttribute("measurementTaskId", measurementTaskId);
-        model.addAttribute("measurementTask", measurementTaskRepository.findOne(measurementTaskId));
+    public String add(ModelMap model, Long measurementTaskTypeId) throws Exception{
+        model.addAttribute("measurementTaskTypeId", measurementTaskTypeId);
+        model.addAttribute("measurementTaskType", measurementTaskTypeRepository.findOne(measurementTaskTypeId));
         return "admin/texture/add";
     }
 
@@ -42,8 +39,8 @@ public class AdminTextureController extends BaseController {
         Texture texture = textureRepository.findOne(id);
         model.addAttribute("texture", texture);
 
-        model.addAttribute("measurementTaskId", texture.getMeasurementTaskId());
-        model.addAttribute("measurementTask", measurementTaskRepository.findOne(texture.getMeasurementTaskId()));
+        model.addAttribute("measurementTaskTypeId", texture.getMeasurementTaskTypeId());
+        model.addAttribute("measurementTaskType", measurementTaskTypeRepository.findOne(texture.getMeasurementTaskTypeId()));
 
         return "admin/texture/update";
     }

@@ -58,9 +58,9 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="measurementRange" class="col-sm-3 text-right control-label col-form-label"><span style="color: red">*</span>测量范围</label>
+                                <label for="textureName" class="col-sm-3 text-right control-label col-form-label"><span style="color: red">*</span>产品类型</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="measurementRange" name="measurementRange" th:value="${guestbook.measurementRange}" disabled="disabled"/>
+                                    <input type="text" class="form-control" id="measurementTaskTypeName" name="measurementTaskTypeName" th:value="${guestbook.measurementTaskTypeName}" disabled="disabled"/>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -69,11 +69,18 @@
                                     <input type="text" class="form-control" id="textureName" name="textureName" th:value="${guestbook.textureName}" disabled="disabled"/>
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <label for="measurementRange" class="col-sm-3 text-right control-label col-form-label"><span style="color: red">*</span>测量范围</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="measurementRange" name="measurementRange" th:value="${guestbook.measurementRange}" disabled="disabled"/>
+                                </div>
+                            </div>
+
 
                             <div class="form-group row" th:each="guestbookParameterValue,stat:${guestbookParameterValues}">
                                 <label for="textureName" class="col-sm-3 text-right control-label col-form-label"><span th:text="${guestbookParameterValue.parameterName}">材质</span></label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" th:if="${guestbookParameterValue.ifInput}" th:value="${guestbookParameterValue.parameterValueName + '，用户收入：' + guestbookParameterValue.content}" disabled="disabled"/>
+                                    <input type="text" class="form-control" th:if="${guestbookParameterValue.ifInput}" th:value="${guestbookParameterValue.parameterValueName + '，用户输入：' + guestbookParameterValue.content}" disabled="disabled"/>
                                     <input type="text" class="form-control" th:if="${!guestbookParameterValue.ifInput}" th:value="${guestbookParameterValue.parameterValueName}" disabled="disabled"/>
                                 </div>
                             </div>

@@ -21,6 +21,8 @@ public class Guestbook implements Serializable {
 
     private Long measurementTaskId;
 
+    private Long measurementTaskTypeId;
+
     private Long textureId;
 
     @Column(length = 200)

@@ -1,7 +1,25 @@
 $(function(){
 
     $('#productFieldId').change(function () {
-        $.get('/api/productType/listByProductFieldId?productFieldId='+$(this).val(),function (data) {
+        $.get('/api/productBrand/listByProductFieldId?productFieldId='+$(this).val(),function (data) {
+            if (data.status=='success') {
+                $('#productBrandId').find('option').remove();
+                var produceBrandOption = `<option value="">请选择所属品牌</option>`;
+                $('#productBrandId').append($(produceBrandOption));
+
+                $('#productTypeId').find('option').remove();
+                var produceTypeOption = `<option value="">请选择所属类型</option>`;
+                $('#productTypeId').append($(produceTypeOption));
+                $.each(data.data,function (i,item) {
+                    produceBrandOption = `<option value="${item.id}">${item.name}</option>`;
+                    $('#productBrandId').append($(produceBrandOption));
+                })
+            }
+        });
+    });
+
+    $('#productBrandId').change(function () {
+        $.get('/api/productType/listByProductBrandId?productBrandId='+$(this).val(),function (data) {
             if (data.status=='success') {
                 $('#productTypeId').find('option').remove();
                 var produceTypeOption = `<option value="">请选择所属类型</option>`;
@@ -25,17 +43,17 @@ $(function(){
 
     var ue = UE.getEditor('editor',{toolbar: [
             [
-                'source', '|', 'undo', 'redo', '|',
-                'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'removeformat',
-                'formatmatch', 'autotypeset', 'blockquote', 'pasteplain',
-                '|', 'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist','|',
+                'fullscreen', 'source', '|', 'undo', 'redo', '|',
+                'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|', 'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc', '|',
                 'rowspacingtop', 'rowspacingbottom', 'lineheight', '|',
-                'customstyle', '|',
+                'customstyle', 'paragraph', 'fontfamily', 'fontsize', '|',
                 'directionalityltr', 'directionalityrtl', 'indent', '|',
                 'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|', 'touppercase', 'tolowercase', '|',
-                'link', 'unlink', 'anchor', '|', 'imagenone', 'imageleft', 'imageright', 'imagecenter', '|','simpleupload', 'insertimage','emotion', '|',
+                'link', 'unlink', 'anchor', '|', 'imagenone', 'imageleft', 'imageright', 'imagecenter', '|',
+                'simpleupload', 'insertimage', 'emotion', 'scrawl', 'music', 'attachment', 'map', 'gmap', 'insertframe', 'insertcode', 'webapp', 'pagebreak', 'template', 'background', '|',
                 'horizontal', 'date', 'time', 'spechars', 'snapscreen', 'wordimage', '|',
-                'inserttable', 'deletetable'
+                'inserttable', 'deletetable', 'insertparagraphbeforetable', 'insertrow', 'deleterow', 'insertcol', 'deletecol', 'mergecells', 'mergeright', 'mergedown', 'splittocells', 'splittorows', 'splittocols', 'charts', '|',
+                'print', 'preview', 'searchreplace', 'drafts', 'help'
             ]
         ]
     });
@@ -64,10 +82,12 @@ $(function(){
     $('#add-message-form').validate({
         rules: {
             productFieldId:{required:true},
+            productBrandId:{required:true},
             productTypeId:{required:true},
             name        :{required:true},
         },messages:{
             productFieldId:{required:"请选择产品领域"},
+            productBrandId:{required:"请选择产品品牌"},
             productTypeId:{required:"请选择产品类型"},
             name :{required:"必填"},
         }
@@ -115,15 +135,15 @@ $(function(){
 var util = {
     isupload: false,
     fileupload: function (form, imgDom, input, $changeDom) {
-        form.attr('action', config.imgUrl + 'api/imageUpload')
+        form.attr('action', '/api/imageUpload')
         form.off('submit').on('submit', function () {
             $(this).ajaxSubmit({
                 beforeSerialize: function () {
                     util.isupload = true
                 },
                 success: function (data) {
-                    input.val(config.imgUrl + "img" + data.url)
-                    imgDom.attr('src', config.imgUrl + "img" + data.url)
+                    input.val( "/img" + data.url)
+                    imgDom.attr('src', "/img" + data.url)
                     util.isupload = false
                     $changeDom.val('')
                     alert('上传成功')
@@ -161,7 +181,7 @@ var util = {
 var utilPdf = {
     isupload: false,
     fileupload: function (form, imgDom, input, $changeDom) {
-        form.attr('action', config.imgUrl + 'api/pdfUpload')
+        form.attr('action', '/api/pdfUpload')
         form.off('submit').on('submit', function () {
             $(this).ajaxSubmit({
                 beforeSerialize: function () {
@@ -169,7 +189,7 @@ var utilPdf = {
                 },
                 success: function (data) {
                     input.val(data.url)
-                    imgDom.attr('src', config.imgUrl + "img" + data.url)
+                    imgDom.attr('src', "/img" + data.url)
                     utilPdf.isupload = false
                     $changeDom.val('')
                     alert('上传成功')
@@ -208,15 +228,15 @@ var utilPdf = {
 var util2 = {
     isupload: false,
     fileupload: function (form, imgDom, input, $changeDom) {
-        form.attr('action', config.imgUrl + 'api/videoUpload')
+        form.attr('action', '/api/videoUpload')
         form.off('submit').on('submit', function () {
             $(this).ajaxSubmit({
                 beforeSerialize: function () {
                     util2.isupload = true
                 },
                 success: function (data) {
-                    input.val(config.imgUrl + "img" + data.url)
-                    imgDom.attr('src', config.imgUrl + "img" + data.url)
+                    input.val( "/img" + data.url)
+                    imgDom.attr('src', "/img" + data.url)
                     util2.isupload = false
                     $changeDom.val('')
                     alert('上传成功')

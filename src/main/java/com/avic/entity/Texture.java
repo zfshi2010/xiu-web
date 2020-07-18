@@ -19,7 +19,7 @@ public class Texture implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long measurementTaskId;
+    private Long measurementTaskTypeId;
 
     @Column(length = 100)
     private String name;

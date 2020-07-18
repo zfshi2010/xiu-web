@@ -37,7 +37,7 @@ var getOpt = function(data){
 //分页开始
 var currentPageData = null ;
 var pageaction = function(){
-    $.get('/api/productType/index?t='+new Date().getTime(),{size:10,serviceForTypeId:$("#serviceForTypeId").val(),name:$('#name').val()},function(data){
+    $.get('/api/productType/index?t='+new Date().getTime(),{size:10,productBrandId:$("#productBrandId").val(),name:$('#name').val()},function(data){
         currentPageData = data.data.content;
         $(".pagination").pagination(data.data.totalElements, getOpt(data));
     });
@@ -49,7 +49,7 @@ var pageselectCallback = function(page_index, jq, size){
         fillData(currentPageData);
         currentPageData = null;
     }else {
-        $.get('/api/productType/index?t='+new Date().getTime(),{size:size,page:page_index, serviceForTypeId:$("#serviceForTypeId").val(),name:$('#name').val()
+        $.get('/api/productType/index?t='+new Date().getTime(),{size:size,page:page_index, productBrandId:$("#productBrandId").val(),name:$('#name').val()
         },function(data){
             fillData(data.data.content);
         });
@@ -87,7 +87,7 @@ function del(id){
         success: function(data) {
             if (data.status == 'success') {
                 alert("删除成功");
-                window.self.location = '/admin/productType/index.html?productFieldId=' + $('#productFieldId').val();
+                window.self.location = '/admin/productType/index.html?productBrandId=' + $('#productBrandId').val();
             } else {
                 alert(data.message);
             }

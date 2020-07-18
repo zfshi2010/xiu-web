@@ -10,6 +10,48 @@
     <meta name="keywords" th:content="${produce.overview}"/>
     <meta name="author" th:content="${produce.author}"/>
     <link rel="stylesheet" type="text/css" href="/phone/css/ltkj.css"/>
+    <style type="text/css">
+        .newstitle {
+            font-weight: bold;
+            text-align: center;
+            margin-top: 10px;
+        }
+        .newstime {
+            text-align: center;
+            color: #aaaaaa;
+        }
+    </style>
+
+    <script src="/phone/js/jquery.min.js"></script>
+    <script type="application/javascript">
+        $(function () {
+            $('#btn-success').on('click',function(){
+                if (!$('#content').val()) {
+                    alert("请填写评论内容!");
+                    return;
+                }
+                if($('#content').val().length > 70) {
+                    alert("评论字数不能超过70个!");
+                    return;
+                }
+                $.ajax({
+                    type: "POST",
+                    url: "/api/produceComment/save",
+                    data: $("#add-message-form").serialize(),
+                    headers: {"Content-type": "application/x-www-form-urlencoded;charset=UTF-8"},
+                    success: function (data) {
+                        if (data.status == 'success') {
+                            alert("评论提交成功!");
+                            history.go(0)
+                        } else {
+                            alert(data.message);
+                        }
+                    }
+                });
+
+            })
+        })
+    </script>
 </head>
 <body>
     <div layout:fragment="content">
@@ -25,7 +67,7 @@
                         <li th:each="contactWay,stat:${contactWays}">
                             <a th:href="${'tel:' + contactWay.phone}">
                                 <img src="/phone/images/phone.png" width="30" height="30" style="line-height:30px;"/>
-                                <span style="line-height:30px;" th:text="${contactWay.name}">联系张三</span>
+                                <span style="line-height:30px;" th:text="${contactWay.name}"></span>
                             </a>
                         </li>
                     </ul>
@@ -40,24 +82,55 @@
                 <!--更换内容开始-->
                 <div class="zy_nr">
                     <h2 th:text="${produce.name}"></h2>
+                    <div style="text-align: center">
+                        <p >
+                            <a href="#" th:text="${'作者:' + produce.author}"></a>
+                            <a href="#" th:text="${'时间:' + produce.createTime}"></a>
+                        </p>
+                        <p th:if="${not #strings.isEmpty(produce.tags)}" th:text="${'标签:' + produce.tags}">
+                            <a th:each="tag : ${#strings.listSplit(produce.tags, ',')}" href="#" th:text="${tag}" th:title="${tag}"></a>
+                        </p>
+                    </div>
                     <img th:src="${produce.img}" th:alt="${produce.name}"/>
-                    <p th:text="${produce.overview}"></p>
+                    <p th:text="${produce.overview}" style="display: none;"></p>
                     <p>
-                        <h4>产品参数</h4>
-                        <p th:utext="${produce.paramContent}"></p>
+                        <div class="round2">
+                            <div class="rTit"><h3>产品参数:</h3></div>
+                            <div class="text indent">
+                                <p th:utext="${produce.paramContent}"></p>
+                            </div>
+                        </div>
                     </p>
+
                     <p>
-                        <h4>产品特点</h4>
-                        <p th:utext="${produce.content}"></p>
+                        <div class="round2">
+                            <div class="rTit"><h3>产品特点:</h3></div>
+                            <div class="text indent">
+                                <p th:utext="${produce.content}"></p>
+                            </div>
+                        </div>
                     </p>
                     <p th:if="${not #strings.isEmpty(produce.video)}">
-                        <h4>视频文件</h4>
+                        <div class="rTit"><h3>视频文件:</h3></div>
                         <p>
                             <video th:src="${produce.video}" controls="controls" width="100%" height="100%" class="img-thumbnail" id="video-img"/>
                         </p>
                     </p>
                     <p th:if="${not #strings.isEmpty(produce.pdfFile)}">
                         <h4>附件：</h4><em><a target="_blank" th:href="${'/phone/produce/pdf-' + produce.id + '.html'}" th:text="${produce.name + '-产品说明文件'}"></a></em>
+                    </p>
+                    <p>
+                        <hr/>
+                        <h4>[评论]</h4>
+                        <div style="padding: 5px;">
+                            <p th:each="produceComment,stat : ${produceComments}" th:text="${stat.index+1 + '楼：' + produceComment.content + '[' + produceComment.createTime + ']'}"></p>
+                        </div>
+                        <div>
+                            <form action="" id="add-message-form">
+                                <input type="hidden" id="produceId" name="produceId" th:value="${produce.id}"/>
+                                <input style="height: 25px;width: 70%;font-size:12px;" name="content" id="content"/><input id="btn-success" type="button" value="评论(70字)" style="height: 25px;background: #0061a8;color: #fff;width: 26%;"/>
+                            </form>
+                        </div>
                     </p>
                 </div>
                 <!--更换内容结束-->

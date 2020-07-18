@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       layout:decorator="phone/fragments/layout">
 <head>
@@ -10,8 +10,16 @@
     <meta name="keywords" th:content="${firstPage.keywords}"/>
     <meta name="author" th:content="${firstPage.author}"/>
     <link rel="stylesheet" type="text/css" href="/phone/css/ltkj.css"/>
-    <script src="/phone/js/jquery-1.9.1.min.js"></script>
-    <script th:src="@{/phone/js/guestbook.js}"></script>
+
+    <script type="text/javascript" th:src="@{/scripts/validate/jquery.validate.min.js}"></script>
+    <script type="text/javascript" th:src="@{/scripts/validate/chinese.js}"></script>
+    <script type="text/javascript" th:src="@{/phone/js/jquery.form.js}"></script>
+    <script type="text/javascript" th:src="@{/phone/js/guestbook.js}"></script>
+    <style type="text/css">
+        .error{
+            color: red !important;
+        }
+    </style>
 </head>
 <body>
     <div layout:fragment="content">
@@ -45,34 +53,30 @@
                         <form class="form1" method="post" action="/phone/guestbook/save.html" name="myform" id="myform">
                             <div class="form_l f_l">
                                 <div class="form_1">
-                                    <label>测量任务<em></em></label>
+                                    <label>测量任务<em>(*必填）</em></label>
                                     <select id="measurementTaskId" name="measurementTaskId">
                                         <option value="">请选择</option>
                                         <option th:each="measurementTask,stat:${measurementTasks}" th:value="${measurementTask.id}" th:text="${measurementTask.name}"></option>
                                     </select>
                                 </div>
                                 <div class="form_1">
-                                    <label>测量范围<em></em></label>
-                                    <input name="measurementRange" id="measurementRange" type="text"/>
+                                    <label>产品类型<em>(*必填）</em></label>
+                                    <select id="measurementTaskTypeId" name="measurementTaskTypeId">
+                                        <option value="">请选择</option>
+                                    </select>
                                 </div>
                                 <div class="form_1">
-                                    <label>材质<em></em></label>
+                                    <label>材质<em>(*必填）</em></label>
                                     <select id="textureId" name="textureId">
                                         <option value="">请选择</option>
                                     </select>
                                 </div>
-                                <div class="form_1" th:each="parameter,stat:${parameters}">
-                                    <label><span th:text="${parameter.name}">测量任务</span><em></em></label>
-                                    <select class="parameter" th:id="${'guestbookParameterValues[' + stat.index +'].parameterValueId'}" th:name="${'guestbookParameterValues[' + stat.index +'].parameterValueId'}">
-                                        <option value="">请选择</option>
-                                        <option th:each="parameterValue,stat2:${parameter.parameterValues}" th:value="${parameterValue.id}" th:text="${parameterValue.value}" th:attr="ifInput=${parameterValue.ifInput}"></option>
-                                    </select>
-                                    <div>
-                                        <input class="content" th:id="${'guestbookParameterValues[' + stat.index +'].content'}" th:name="${'guestbookParameterValues[' + stat.index +'].content'}" type="text" style="display: none"/>
-                                        <input class="ifInput" th:id="${'guestbookParameterValues[' + stat.index +'].ifInput'}" th:name="${'guestbookParameterValues[' + stat.index +'].ifInput'}" type="hidden" value="false"/>
-                                        <input th:id="${'guestbookParameterValues[' + stat.index +'].parameterId'}" th:name="${'guestbookParameterValues[' + stat.index +'].parameterId'}" type="hidden" th:value="${parameter.id}"/>
-                                        <input th:id="${'guestbookParameterValues[' + stat.index +'].parameterName'}" th:name="${'guestbookParameterValues[' + stat.index +'].parameterName'}" type="hidden" th:value="${parameter.name}"/>
-                                    </div>
+                                <div class="form_1">
+                                    <label>测量范围<em></em></label>
+                                    <input name="measurementRange" id="measurementRange" type="text"/>
+                                </div>
+                                <div id="other-params">
+
                                 </div>
                                 <div class="form_1">
                                     <label>公司<em>(*必填）</em></label>
@@ -91,7 +95,7 @@
                                     <textarea style="width: 100%;height: 80px;" name="content" id="content"/>
                                 </div>
                                 <p th:text="${errorMessage}" style="color: red;" />
-                                <input name="" type="submit" class="button" value="提交留言"/>
+                                <input name="" type="button" id="save-button" class="button" value="提交信息"/>
                             </div>
                         </form>
                     </p>

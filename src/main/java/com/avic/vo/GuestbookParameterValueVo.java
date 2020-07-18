@@ -20,6 +20,8 @@ public class GuestbookParameterValueVo implements Serializable {
 
     private Long parameterValueId;
 
+    private String parameterValueName;
+
     private Boolean ifInput;
 
     private String content;

@@ -84,7 +84,7 @@ public class PhoneGuestbookController extends BaseController {
         List<MeasurementTask> measurementTasks = measurementTaskRepository.findAll();
         model.addAttribute("measurementTasks", measurementTasks);
 
-        model.addAttribute("parameters", getParameters());
+      //  model.addAttribute("parameters", getParameters());
 
         return "phone/guestbook/index";
     }
